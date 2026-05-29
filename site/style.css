@@ -332,6 +332,31 @@ p.dropcap::first-letter {
   opacity: 0.4;
 }
 
+.auth-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 3px 9px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  color: var(--ink-mute);
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+.auth-toggle:hover {
+  color: var(--ink);
+  border-color: var(--ink-mute);
+}
+.auth-toggle[data-signed-in] {
+  border-color: var(--blueprint);
+  color: var(--blueprint);
+}
+
 .theme-toggle {
   background: transparent;
   border: 1px solid var(--rule-soft);

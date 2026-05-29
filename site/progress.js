@@ -40,7 +40,7 @@
     if (!sb) return;
 
     sb.from('progress').select('*').eq('user_id', userId).then(function (result) {
-      if (result.error) return;
+      if (result.error) { console.error('[AIFS] syncFromCloud error:', result.error); return; }
       var rows = result.data || [];
       var state = read();
       var cloudPaths = {};
@@ -90,7 +90,9 @@
       completed_at: lessonData.completedAt || null,
       visited_at: lessonData.visitedAt || 0,
       answers: lessonData.answers || {}
-    }, { onConflict: 'user_id,lesson_path' }).then(function () {});
+    }, { onConflict: 'user_id,lesson_path' }).then(function (r) {
+      if (r.error) console.error('[AIFS] pushRowToCloud error:', r.error);
+    });
   }
 
   function deleteRowFromCloud(path) {
@@ -103,14 +105,18 @@
       completed_at: null,
       visited_at: 0,
       answers: {}
-    }, { onConflict: 'user_id,lesson_path' }).then(function () {});
+    }, { onConflict: 'user_id,lesson_path' }).then(function (r) {
+      if (r.error) console.error('[AIFS] deleteRowFromCloud error:', r.error);
+    });
   }
 
   function clearCloudData() {
     if (!cloudUserId) return;
     var sb = getSupabaseClient();
     if (!sb) return;
-    sb.from('progress').delete().eq('user_id', cloudUserId).then(function () {});
+    sb.from('progress').delete().eq('user_id', cloudUserId).then(function (r) {
+      if (r.error) console.error('[AIFS] clearCloudData error:', r.error);
+    });
   }
 
   function clearCloudUser() {
