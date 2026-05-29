@@ -45,29 +45,38 @@
   function computeStats() {
     var totalLessons = 0;
     var completeLessons = 0;
+    var completePhases = 0;
+    var languagesUsed = {};
     var hasProgress = !!window.AIFSProgress;
     for (var i = 0; i < PHASES.length; i++) {
       var lessons = PHASES[i].lessons;
+      var phaseComplete = true;
       totalLessons += lessons.length;
       for (var j = 0; j < lessons.length; j++) {
-        var staticDone = lessons[j].status === 'complete';
         var userDone = false;
         if (hasProgress && lessons[j].url) {
           var lp = window.AIFSProgress.extractPath(lessons[j].url);
           if (lp) userDone = window.AIFSProgress.isLessonComplete(lp);
         }
-        if (staticDone || userDone) completeLessons++;
+        if (userDone) {
+          completeLessons++;
+          // Track distinct languages used
+          var lang = lessons[j].lang || 'unknown';
+          languagesUsed[lang.toLowerCase()] = true;
+        } else {
+          phaseComplete = false;
+        }
       }
+      if (phaseComplete && lessons.length > 0) completePhases++;
     }
-    var completePhases = 0;
-    for (var p = 0; p < PHASES.length; p++) {
-      if (PHASES[p].status === 'complete') completePhases++;
-    }
+    var distinctLanguages = Object.keys(languagesUsed).length;
     return {
       lessons: totalLessons,
       phases: PHASES.length,
       complete: completeLessons,
-      completePhases: completePhases
+      completePhases: completePhases,
+      languagesUsed: distinctLanguages,
+      totalLanguages: 4
     };
   }
 
@@ -87,15 +96,18 @@
     var stats = computeStats();
     var pct = stats.lessons > 0 ? (stats.complete / stats.lessons) * 100 : 0;
     var phasePct = stats.phases > 0 ? (stats.completePhases / stats.phases) * 100 : 0;
+    var langPct = stats.totalLanguages > 0 ? (stats.languagesUsed / stats.totalLanguages) * 100 : 0;
     var glossaryCount = (typeof GLOSSARY !== 'undefined') ? GLOSSARY.length : 0;
+    var glossaryViewed = 0; // TODO: Track glossary term views in progress.js
 
     setText('[data-stat="complete-frac"]', stats.complete + ' / ' + stats.lessons);
     setText('[data-stat="phases-frac"]', stats.completePhases + ' / ' + stats.phases);
-    setText('[data-stat="glossary-count"]', String(glossaryCount));
+    setText('[data-stat="languages-frac"]', stats.languagesUsed + ' / ' + stats.totalLanguages);
+    setText('[data-stat="glossary-count"]', glossaryViewed + ' / ' + glossaryCount);
     setBar('[data-bar="complete"]', pct);
     setBar('[data-bar="phases"]', phasePct);
-    setBar('[data-bar="languages"]', 100);
-    setBar('[data-bar="glossary"]', glossaryCount > 0 ? 100 : 0);
+    setBar('[data-bar="languages"]', langPct);
+    setBar('[data-bar="glossary"]', glossaryCount > 0 ? (glossaryViewed / glossaryCount) * 100 : 0);
   }
 
   function setText(selector, value) {
@@ -113,13 +125,12 @@
       var total = p.lessons.length;
       var done = 0;
       for (var j = 0; j < p.lessons.length; j++) {
-        var staticDone = p.lessons[j].status === 'complete';
         var userDone = false;
         if (hasProgress && p.lessons[j].url) {
           var lp = window.AIFSProgress.extractPath(p.lessons[j].url);
           if (lp) userDone = window.AIFSProgress.isLessonComplete(lp);
         }
-        if (staticDone || userDone) done++;
+        if (userDone) done++;
       }
       var statusClass = p.status.replace(/ /g, '-');
       var roman = toRoman(p.id);
@@ -248,7 +259,7 @@
       html += '<span class="modal-lesson-lang">' + escapeHtml(l.lang) + '</span>';
 
       var actionHtml = '';
-      if ((l.status === 'complete' || userComplete) && lessonPath) {
+      if (lessonPath) {
         actionHtml = '<a href="lesson.html?path=' + lessonPath + '" class="modal-lesson-read">' + (userComplete ? 'Review' : 'Read') + '</a>';
       }
       var toggleHtml = '';
@@ -411,10 +422,8 @@
   }
 
   function applyExplode(container, progress) {
-    // Each layer / label animates over its own window in [stagger_start, stagger_start + window].
-    // Sequential reveal: layer N waits for layer N-1 to mostly settle before starting.
-    var STAGGER_DENOM = 720; // higher → wider gaps between layer entrances
-    var WINDOW = 0.55;       // each layer's local animation duration as fraction of global progress
+    var STAGGER_DENOM = 720;
+    var WINDOW = 0.55;
 
     function localProgress(staggerAttr) {
       var stagger = parseFloat(staggerAttr) || 0;
@@ -422,7 +431,6 @@
       var local = (progress - start) / WINDOW;
       if (local < 0) local = 0;
       if (local > 1) local = 1;
-      // ease-out cubic on the local segment
       return 1 - Math.pow(1 - local, 3);
     }
 
