@@ -31,21 +31,9 @@ Handoff: Otto advises → user approves → Cline implements.
 
 ## Graphify (local)
 
-- Python 3.12+: `py -3.12 -m pip install graphifyy`
-- Rebuild after code changes: `py -3.12 -m graphify update .` (Cline only)
-- **Freshness check (implementer):** after `graphify update .`, run
-  `python3 scripts/check_graphify_freshness.py --strict`. Exit 0 required
-  before marking the task done. If the PR only touched README, ROADMAP,
-  glossary, or quiz.json under phases (no `code/` or `site/`), the script
-  skips automatically unless you pass `--always`.
-- **Freshness check (Consultant/Otto):** may run without `--strict` for
-  diagnostics; never run `graphify update`.
-- Query: `py -3.12 -m graphify query "..."` (Consultant/Otto and Cline)
-- Outputs in `graphify-out/` (gitignored). `graph.json` is machine-only — never open for reading.
-- `GRAPH_REPORT.md`: optional skim of God Nodes / Surprising / Suggested Questions only; skip Community Hubs and Communities.
-- Full-repo graph is too large for `graph.html`. Do not run `graphify site` unless intentionally replacing the full graph.
-- No Obsidian/wiki workflow for this repo unless user revisits later.
-- **Always use `py -3.12 -m graphify query` or `graphify path` / `graphify explain` instead of reading `graph.json` directly.**
+**Canonical rule:** `.cursor/rules/graphify.mdc` (query-first, graph refresh, freshness gate).
+
+Install: `py -3.12 -m pip install graphifyy`. Checker: `python3 scripts/check_graphify_freshness.py`.
 
 ## Handoffs between agents
 

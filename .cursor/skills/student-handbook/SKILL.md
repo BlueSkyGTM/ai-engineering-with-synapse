@@ -53,7 +53,7 @@ Lesson **outputs** under `phases/**/outputs/` (hundreds of prompts/skills) are l
 | **curriculum-chat** | Read `progress/aifs-progress.json`; office hours vs lesson quiz flow; cross-phase bridges |
 | **lesson-planning-gate** | Before editing `quiz.json`, read lesson-planning skill |
 | **consultant-charter** | Otto = advise; Cline = implement |
-| **graphify** | Query codebase graph; don't read `graph.json` |
+| **graphify.mdc** | Query-first, graph refresh, freshness gate (canonical) |
 | **terminal-hygiene** | Cline backend terminal vs editor terminals |
 | **handoff-format** | One copy-paste block Otto → Cline |
 

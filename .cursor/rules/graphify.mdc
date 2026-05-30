@@ -1,35 +1,66 @@
 ---
-description: graphify knowledge graph — agent routines (Consultant + Cline)
+description: graphify — query-first exploration, graph refresh, freshness gate (all agents)
 alwaysApply: true
 ---
 
-Local graph at graphify-out/ (gitignored). Regenerate: py -3.12 -m graphify update .
+# Graphify (canonical — all agents read this; do not duplicate in AGENTS.md prose)
 
-## Consultant / Otto (read-only)
+Local knowledge graph: `graphify-out/` (gitignored forever). Install: `py -3.12 -m pip install graphifyy`.
 
-- When graphify-out/graph.json exists, before broad repo search:
-  py -3.12 -m graphify query "<narrow question>"
-  py -3.12 -m graphify path "<A>" "<B>"
-  py -3.12 -m graphify explain "<node>"
-- Narrow queries (e.g. site/progress.js export import). Prefer path/explain when paths are known.
-- Never read graph.json into context.
-- GRAPH_REPORT.md: read only ## God Nodes, ## Surprising Connections, ## Suggested Questions, and the short header (Corpus/Summary/Freshness). Skip ## Community Hubs and ## Communities entirely.
-- Do not run graphify update.
-- May run `python3 scripts/check_graphify_freshness.py` (no `--strict`) to
-  report staleness; must not run `graphify update`.
+## Query-first (Consultant / Otto / Auto — read-only)
 
-## Cline (implementer)
+When `graphify-out/graph.json` exists, before broad grep or reading many files:
 
-- After edits under `site/` or `phases/`:
-  1. `py -3.12 -m graphify update .`
-  2. `python3 scripts/check_graphify_freshness.py --strict` (must exit 0)
-- If the session only changed README, ROADMAP, glossary, or quiz.json (no
-  `phases/**/code/` and no `site/`), skip both steps unless the user asks.
-- Use query/path/explain when reviewing PRs.
+```bash
+py -3.12 -m graphify query "<narrow question>"
+py -3.12 -m graphify path "<A>" "<B>"
+py -3.12 -m graphify explain "<concept>"
+```
+
+- Never load `graph.json` into context (~24k nodes; machine-only).
+- `GRAPH_REPORT.md`: read only **Corpus/Summary**, **Graph Freshness**, **God Nodes**, **Surprising Connections**, **Suggested Questions**. Skip Community Hubs and Communities.
+- If `graphify-out/wiki/index.md` exists, use it instead of raw file spelunking.
+- May run `python3 scripts/check_graphify_freshness.py` (no `--strict`) to report staleness.
+- **Must not** run `graphify update`, `graphify site`, or commit `graphify-out/`.
+
+## Graph refresh (user + Cline — after graph-relevant edits)
+
+**Graph refresh** = re-extract AST and rebuild the local graph (no LLM cost):
+
+```bash
+py -3.12 -m graphify update .
+```
+
+Run when you change lesson `code/`, `docs/`, `outputs/`, or anything under `site/`.
+
+**Skip graph refresh** when the session only touched README, ROADMAP, glossary, or `phases/**/quiz.json` (no `code/`, no `site/`).
+
+Optional long sessions: `py -3.12 -m graphify watch .` (continuous refresh on save).
+
+Do **not** run `graphify site` on this repo — full graph exceeds HTML viz limits; use query/path/explain.
+
+## Freshness gate (Cline / implementer — hard exit after refresh)
+
+After graph refresh (or when graph-relevant files changed vs HEAD):
+
+```bash
+python3 scripts/check_graphify_freshness.py --strict
+```
+
+Exit **0** required before marking the task done. Exit **1** = stale → run graph refresh again.
+
+Checker skips automatically for quiz-only / catalog-only work unless you pass `--always`.
 
 ## Do not
 
-- Run graphify site on the only graph (replaces full curriculum graph with site-only).
-- Commit graphify-out/.
-- Use Obsidian or --wiki for this project unless user explicitly requests later.
-- Do not add CI, pre-commit hooks, or commit `graphify-out/` for freshness.
+- Add CI, pre-commit hooks, or `.cursor/hooks.json` for graphify (agent-side rule + script only).
+- Run `graphify cursor install` here — it overwrites this file with the stock template.
+- Commit `graphify-out/` or use Obsidian/wiki unless the user explicitly asks later.
+
+## Quick reference
+
+| Who | Explore | Refresh graph | Verify |
+|-----|---------|---------------|--------|
+| User (Raymo) | query / path / explain | **graph refresh**: `graphify update .` | optional: `check_graphify_freshness.py --always` |
+| Otto | query only | never | optional, no `--strict` |
+| Cline | query when reviewing | update after code/site edits | `--strict` must pass |

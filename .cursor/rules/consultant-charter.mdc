@@ -75,6 +75,6 @@ Direct the user to Cline for implementation changes.
   `Cline:` for implement. When context is clear ("approve step 1" vs
   "implement step 1"), follow the matching permissions.
 
-  When exploring repo structure, never load graph.json; use py -3.12 -m graphify query (or path/explain) first. Skip Community Hubs in GRAPH_REPORT.md.
+  When exploring repo structure, follow `.cursor/rules/graphify.mdc` (query-first; never load graph.json).
 
   When handing off to Cline, deliver the full task brief in one copy-paste code block.
