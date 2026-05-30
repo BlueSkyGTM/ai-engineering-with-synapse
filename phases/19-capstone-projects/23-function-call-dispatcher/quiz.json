@@ -12,7 +12,7 @@
         "Process restarts"
       ],
       "correct": 1,
-      "explanation": "Without dedupe, a retry at 5s races a slow original still pending. The cache collapses both into one handler invocation."
+      "explanation": "The dispatcher maintains a tool registry with metadata: tool name, parameter schema (JSON Schema), return type schema, and execution context (sync/async, timeout)."
     },
     {
       "stage": "check",
@@ -24,7 +24,7 @@
         "All of them"
       ],
       "correct": 2,
-      "explanation": "Schema and not_found are deterministic. Internal masks an unknown handler bug. Budget exceeded is a yield. Only timeout-on-idempotent and explicit TransientError retry."
+      "explanation": "Parameter validation uses JSON Schema validation against tool definitions, rejecting invalid requests with clear error messages indicating the validation failure."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         "The retry counter"
       ],
       "correct": 1,
-      "explanation": "A gather of forty calls would open forty concurrent dispatches without the limit. The semaphore caps the wave."
+      "explanation": "Execution routing directs tool calls to appropriate handlers: built-in tools (file operations, shell commands), MCP tools (via protocol), or custom Python functions."
     },
     {
       "stage": "check",
@@ -48,7 +48,7 @@
         "Because the cache cannot store strings"
       ],
       "correct": 1,
-      "explanation": "The caller knows the step id, the planner intent, the user. Args alone are not enough context to safely dedupe."
+      "explanation": "Async tool execution supports long-running operations (HTTP requests, subprocess calls) with futures/promises, enabling concurrent execution of multiple tool calls."
     },
     {
       "stage": "post",
@@ -60,7 +60,7 @@
         "-32700"
       ],
       "correct": 1,
-      "explanation": "-32602 Invalid params. The dispatcher returns it before any handler runs."
+      "explanation": "The capstone measures dispatcher throughput (tool calls per second), validation accuracy (correctness of parameter checks), and async support (successful concurrent execution)."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "DispatchError with kind=internal"
       ],
       "correct": 2,
-      "explanation": "The dispatcher returns a typed error envelope. The kind reflects the last failure mode, attempts reflects how many tries it made."
+      "explanation": "Error handling provides structured error responses for validation failures, execution errors, and timeouts, with error propagation to the agent loop for recovery."
     }
   ]
 }
