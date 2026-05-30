@@ -12,7 +12,7 @@
         "A hook subscriber that mutates payload"
       ],
       "correct": 0,
-      "explanation": "Pull points are returns, not exceptions. The caller fetches what the harness asked for and calls resume()."
+      "explanation": "The plan surface maintains a typed TodoWrite state object with pending/in-progress/done items, which the model rewrites each turn rather than mutating incrementally."
     },
     {
       "stage": "check",
@@ -24,7 +24,7 @@
         "PLANNING"
       ],
       "correct": 1,
-      "explanation": "Only AWAITING_TOOL yields a tool pull point. EXECUTING transitions into it when a step requires a tool."
+      "explanation": "The act surface dispatches tool calls via a unified interface that handles tool registration, parameter validation, and response aggregation across different transport protocols."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         "The budget is reset"
       ],
       "correct": 1,
-      "explanation": "HookAbort cancels the in-flight tool dispatch, fires on_error with the abort reason, and continues."
+      "explanation": "The observe surface captures stdout/stderr/exit codes from tool execution, truncates output to prevent context overflow, and structures the summary for model consumption."
     },
     {
       "stage": "check",
@@ -48,19 +48,19 @@
         "Because the event log cannot store dicts"
       ],
       "correct": 1,
-      "explanation": "Hooks change behavior. Events describe behavior. Mixing them couples policy and telemetry, which is the bug we are avoiding."
+      "explanation": "Recovery handles tool errors by retrying with modified parameters, falling back to alternative tools, or escalating to human intervention, without crashing the agent loop."
     },
     {
       "stage": "post",
       "question": "When the wall-clock budget is exceeded, what is the next state?",
       "options": [
-        "DONE \u00e2\u20ac\u201d the session is terminated",
-        "EXECUTING \u00e2\u20ac\u201d the loop retries",
-        "IDLE \u00e2\u20ac\u201d a pull point is returned with a budget_exceeded reason",
-        "PLANNING \u00e2\u20ac\u201d a fresh plan is drafted"
+        "DONE â€” the session is terminated",
+        "EXECUTING â€” the loop retries",
+        "IDLE â€” a pull point is returned with a budget_exceeded reason",
+        "PLANNING â€” a fresh plan is drafted"
       ],
       "correct": 2,
-      "explanation": "Budget exhaustion is a yield. The harness transitions to IDLE, fires on_budget_exceeded, and returns a PullRequest so the caller can decide whether to extend or close."
+      "explanation": "The contract specifies message formats (JSON schemas), error handling conventions (status codes, retry logic), and observability requirements (span tags, token accounting)."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "To save tokens"
       ],
       "correct": 1,
-      "explanation": "Pinning the loop contract first lets later lessons swap in real planners, registries, and dispatchers without renegotiating the state machine."
+      "explanation": "Versioning uses schema version fields in messages, backward-compatible extensions, and deprecation notices to enable graceful evolution of the harness contract."
     }
   ]
 }
