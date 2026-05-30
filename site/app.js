@@ -341,25 +341,33 @@
     if (!window.AIFSProgress) return;
 
     var exportBtn = document.getElementById('exportBtn');
+    var headerExportBtn = document.getElementById('headerExportBtn');
     var importBtn = document.getElementById('importBtn');
+    var headerImportBtn = document.getElementById('headerImportBtn');
     var importFile = document.getElementById('importFile');
 
-    if (exportBtn) {
-      exportBtn.addEventListener('click', function () {
-        try {
-          window.AIFSProgress.exportProgress();
-        } catch (e) {
-          console.error('Export failed:', e);
-          alert('Failed to export progress. Please try again.');
-        }
-      });
-    }
+    var handleExport = function () {
+      try {
+        window.AIFSProgress.exportProgress();
+      } catch (e) {
+        console.error('Export failed:', e);
+        alert('Failed to export progress. Please try again.');
+      }
+    };
 
-    if (importBtn && importFile) {
-      importBtn.addEventListener('click', function () {
+    if (exportBtn) exportBtn.addEventListener('click', handleExport);
+    if (headerExportBtn) headerExportBtn.addEventListener('click', handleExport);
+
+    var handleImport = function () {
+      if (importFile) {
         importFile.click();
-      });
+      }
+    };
 
+    if (importBtn) importBtn.addEventListener('click', handleImport);
+    if (headerImportBtn) headerImportBtn.addEventListener('click', handleImport);
+
+    if (importFile) {
       importFile.addEventListener('change', function (e) {
         var file = e.target.files[0];
         if (!file) return;
