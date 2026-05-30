@@ -1,6 +1,6 @@
 {
   "lesson": "01-terminal-native-coding-agent",
-  "title": "Capstone 01 \u00e2\u20ac\u201d Terminal-Native Coding Agent",
+  "title": "Capstone 01 — Terminal-Native Coding Agent",
   "questions": [
     {
       "stage": "pre",
@@ -12,7 +12,7 @@
         "To enable GPU access for the agent loop"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "E2B and Daytona sandboxes isolate each task in a fresh devcontainer with a git worktree, ensuring the harness never touches the host filesystem and allowing safe teardown on completion."
     },
     {
       "stage": "check",
@@ -24,7 +24,7 @@
         "PostToolUse"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "PreToolUse runs before each tool call, making it the correct hook to inspect and block dangerous operations like rm -rf outside the worktree."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         "Model overfitting to tool-call traces"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "Truncating tool output prevents context window overflow and runaway token costs when tools like ripgrep return megabytes of matches."
     },
     {
       "stage": "check",
@@ -48,7 +48,7 @@
         "Switches the backing model to a smaller draft model"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "PreCompact summarizes older conversation history into a prior-state block, freeing context space for new observations while preserving the plan."
     },
     {
       "stage": "post",
@@ -60,7 +60,7 @@
         "Aider"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "mini-swe-agent is the minimal baseline used for comparison on pass@1, turns-per-task, and cost-per-task metrics."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "MRR@10 and nDCG@10"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "The rubric measures SWE-bench Pro pass@1 vs baseline, architecture clarity, safety, observability, and developer UX, with specific quantification of turns-per-task and cost-per-task."
     }
   ]
 }
