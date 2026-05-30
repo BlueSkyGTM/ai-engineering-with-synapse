@@ -34,7 +34,9 @@ Handoff: Otto advises → user approves → Cline implements.
 - Requires Python 3.12 or 3.13: `py -3.12 -m pip install graphifyy`
 - Rebuild after code changes: `py -3.12 -m graphify update .`
 - Query: `py -3.12 -m graphify query "..."` (see `.cursor/rules/graphify.mdc`)
-- Outputs live in `graphify-out/` (cache gitignored).
+- Outputs live in `graphify-out/` (entire directory is gitignored).
+- `graph.json` is local-only (gitignored); regenerate with `py -3.12 -m graphify update .`
+- Full-repo graph is too large for `graph.html` (limit 5000 nodes). Query CLI, open `GRAPH_REPORT.md`, or use `py -3.12 -m graphify site` for a smaller scoped build.
 
 ---
 
