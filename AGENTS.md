@@ -29,6 +29,15 @@ Handoff: Otto advises → user approves → Cline implements.
 
 ---
 
+## Graphify (local)
+
+- Requires Python 3.12 or 3.13: `py -3.12 -m pip install graphifyy`
+- Rebuild after code changes: `py -3.12 -m graphify update .`
+- Query: `py -3.12 -m graphify query "..."` (see `.cursor/rules/graphify.mdc`)
+- Outputs live in `graphify-out/` (cache gitignored).
+
+---
+
 ## Repo layout
 
 ```
