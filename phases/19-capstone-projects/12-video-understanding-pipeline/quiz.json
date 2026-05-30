@@ -1,6 +1,6 @@
 {
   "lesson": "12-video-understanding-pipeline",
-  "title": "Capstone 12 \u00e2\u20ac\u201d Video Understanding Pipeline (Scene, QA, Search)",
+  "title": "Capstone 12 — Video Understanding Pipeline (Scene, QA, Search)",
   "questions": [
     {
       "stage": "pre",
@@ -12,7 +12,7 @@
         "Pose, depth, and optical flow"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "Scene segmentation uses CLIP embeddings to detect shot boundaries and keyframes, dividing long videos into semantically coherent segments for processing."
     },
     {
       "stage": "check",
@@ -24,7 +24,7 @@
         "By taking the union without scoring"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "Temporal modeling uses VideoMAE or similar architectures to understand motion patterns and temporal relationships between frames across video segments."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         "The keyframe embedding dimensionality"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "Multi-modal QA combines visual features (frame embeddings), audio features (speech transcription, sound analysis), and text features (captions, subtitles) for comprehensive understanding."
     },
     {
       "stage": "check",
@@ -48,7 +48,7 @@
         "Counting and action-type questions, where VLMs miscount or mis-order events"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "Search indexing stores segment embeddings with metadata (timestamps, visual tags, audio transcripts), enabling temporal search (finding events at specific times) and semantic search (finding similar scenes)."
     },
     {
       "stage": "post",
@@ -60,7 +60,7 @@
         "MRR@10"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "The capstone measures scene segmentation accuracy (boundary detection F1 score), QA accuracy (correctness of answers to video questions), and search relevance (retrieval quality for video queries)."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "They let the viewer jump to the exact (video_id, start, end) so users can verify the claim"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "Processing efficiency is measured by throughput (frames per second) and latency (time to process a 10-minute video end-to-end)."
     }
   ]
 }
