@@ -12,6 +12,23 @@ The repo is a curriculum, not a SaaS app. The lessons are the product. Every rul
 
 ---
 
+## Agent roles
+
+Both agents follow `.cursor/rules/consultant-charter.mdc` (Reasoning +
+Discipline on any topic — not engineering-only).
+
+| Role | Who | Permissions |
+|------|-----|-------------|
+| **Consultant / Navigator / Otto** | Cursor chat (Auto) | Read-only. May read files and run non-mutating commands (grep, `graphify query`). Approve/reject plans. No file edits, commit, push, install, or `graphify update`. |
+| **Implementer** | Cline | Same reasoning and discipline before every change. Edits, tests, commits after user request or Consultant/Otto approve. No scope creep. |
+
+**Otto** is the nickname for the Auto-mode Consultant — same role, same
+permissions as Navigator.
+
+Handoff: Otto advises → user approves → Cline implements.
+
+---
+
 ## Repo layout
 
 ```
@@ -215,4 +232,4 @@ gh pr create --title "feat(phase-NN/MM): add <slug>" --body "<5-line summary>"
 
 ---
 
-Last reviewed: 2026-05-27.
+Last reviewed: 2026-05-29.
