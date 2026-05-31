@@ -57,6 +57,5 @@ mlruns/
 .gstack/
 
 .link-cache.json
-.claude/
 catalog.json
 .agents/
