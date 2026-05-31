@@ -4,75 +4,75 @@
   "questions": [
     {
       "stage": "pre",
-      "question": "What is the core operation in differential attention?",
+      "question": "Softmax attention has a noise floor: every non-matching key receives some positive weight. At 128K tokens, roughly what fraction of total attention mass lands on unrelated tokens, and what observable failure mode does this cause?",
       "options": [
-        "Adding two attention distributions together",
-        "Computing the difference between two softmax-normalized attention distributions",
-        "Applying a single softmax to query-key scores",
-        "Concatenating attention heads"
-      ],
-      "correct": 1,
-      "explanation": "Differential attention computes softmax(Q₁K₁^T) - softmax(Q₂K₂^T), where the subtraction of two attention distributions cancels out noise and amplifies the signal. This is the defining operation that gives the technique its name and effectiveness."
-    },
-    {
-      "stage": "check",
-      "question": "Why does differential attention reduce noise compared to standard attention?",
-      "options": [
-        "Because it skips the softmax computation",
-        "Because it uses more parameters",
-        "Because noise is typically structured similarly across the two attention maps and subtracts out, while the signal (relevant query-key matches) tends to differ",
-        "Because it averages across more heads"
+        "About 1% — a negligible amount; the failure mode is gradient vanishing in very deep stacks",
+        "About 10% — moderate and manageable; the failure mode is slower training convergence",
+        "Nearly 100% — the combined weight of ~128K unrelated tokens each receiving O(1/N) approaches the full probability mass, causing attention-sink contamination and lost-in-the-middle failures on long-context retrieval tasks",
+        "About 50% — half the mass goes to unrelated tokens; the failure mode is increased perplexity only on out-of-domain inputs"
       ],
       "correct": 2,
-      "explanation": "The noise cancellation analogy is key: if two noisy measurements are subtracted, the shared noise cancels while the true difference remains. In attention, both maps attend to somewhat similar patterns (noise), but the true query-key relationships differ between the two projections (signal)."
+      "explanation": "Each unrelated token receives roughly 1/N weight; with N−k relevant tokens (k small), their total mass is (N−k)/N → 1 as N grows. At 128K context even a perfectly tuned model has nearly all its attention mass on the ~127,999 non-matching tokens. The doc measures this as 'lost-in-the-middle' failures and hallucinated citations in RAG tasks past 32K tokens."
     },
     {
       "stage": "check",
-      "question": "What is the role of the learned scalar λ in differential attention?",
+      "question": "Differential attention computes DiffAttn = (A1 − λ·A2)V using two softmax maps. Why does subtracting A2 cancel the noise floor without also cancelling the signal on relevant tokens?",
       "options": [
-        "It is always set to 1.0",
-        "It scales the key vectors",
-        "It determines the number of heads",
-        "It controls the balance between the differential component and the standard component, allowing the model to dial in how much noise cancellation to apply"
+        "A2 is computed on a shuffled key matrix, so it contains only noise and no signal",
+        "Both maps share approximately the same uniform distribution over unrelated tokens, so their noise cancels; the signal survives because the two branches learn to respond to relevant tokens with different magnitudes under training",
+        "The sign of the subtraction inverts the noise term, which is then absorbed by a ReLU after the V multiplication",
+        "A2 uses a different scaling factor (1/√2d) that makes it capture only low-frequency noise components"
+      ],
+      "correct": 1,
+      "explanation": "At random initialisation both A1 and A2 distribute weight roughly uniformly over 128K tokens — they share the same noise floor. Subtracting cancels this shared noise. Signal (the peaked weight on a few relevant tokens) survives because the two branches, trained with separate Q1/K1 and Q2/K2 projections, learn to respond with different magnitudes to relevant positions. λ (a per-head learnable scalar) controls the cancellation depth."
+    },
+    {
+      "stage": "check",
+      "question": "DIFF V1 halved the head dimension to keep parameter count equal, which caused a decode speed regression. DIFF V2 keeps the same head dimension but doubles the number of Q heads while keeping KV heads the same. How does this fix the decode speed problem?",
+      "options": [
+        "More Q heads reduce attention-score variance per head, needing fewer iterations to converge at decode time",
+        "Doubling Q heads compresses the attention output, halving how much of the KV cache must be loaded per step",
+        "V2 switches to GQA internally, which shares KV across head groups and eliminates duplicate loading",
+        "V1's halved head dimension meant two value-cache loads per decode step; V2 loads the value cache once per KV head regardless of how many Q heads use it, matching baseline decode cost"
       ],
       "correct": 3,
-      "explanation": "λ is a learned parameter that multiplies the differential attention term before adding it to a baseline standard attention term. This lets the model learn when differential attention is helpful (high λ) vs when standard attention suffices (low λ), making it a flexible, learnable mechanism."
+      "explanation": "V1's differential operation required two separate Q/K projections per head by halving d_head — but the V cache was also halved, so two loads were needed to serve both branches. This doubled decode memory bandwidth. V2 moves the extra capacity to the Q side (more Q heads, same KV heads), so the V cache is loaded once and shared across all Q heads — matching standard GQA decode behaviour."
     },
     {
       "stage": "check",
-      "question": "What architectural change enables differential attention?",
+      "question": "The doc gives a context-length table for when differential attention is worth deploying. Below what rough threshold does differential attention provide essentially no benefit over standard softmax attention?",
       "options": [
-        "Dedicating a subset of attention heads to computing differential attention instead of standard attention",
-        "Adding more layers",
-        "Increasing model width",
-        "Changing the activation function"
+        "Around 4K tokens — the noise floor is small enough that standard attention is fine; differential attention only pays at 64K+",
+        "Around 512 tokens — the noise is negligible at very short sequences but grows above 1K",
+        "Around 16K tokens — V2's changes make the break-even point exactly here",
+        "There is no lower threshold; differential attention improves signal-to-noise even at 128 tokens"
       ],
       "correct": 0,
-      "explanation": "Differential attention V2 uses specialized heads that compute the difference operation. These heads are interleaved with standard attention heads, giving the model both options. The allocation of differential vs standard heads can be learned during training."
+      "explanation": "The doc's workload table shows: long-context RAG (64K+), needle-in-haystack, and multi-document QA all benefit substantially; code completion at 8K sees marginal gain; short chat under 4K is 'essentially indistinguishable from baseline.' The noise floor (O(1/N) per unrelated token) is small at 4K — there are fewer unrelated tokens to accumulate, so standard attention is fine."
     },
     {
       "stage": "post",
-      "question": "How does differential attention help with long-range reasoning?",
+      "question": "Step 3 of the Build code computes diff_weights = [[a1 − λ·a2 ...]]. The doc notes that diff_weights can be negative. Why is this valid — what handles negative weights downstream?",
       "options": [
-        "By shortening sequences",
-        "By canceling out spurious attention patterns that accumulate over long sequences, leaving only the genuine long-range dependencies",
-        "By adding more positional encodings",
-        "By increasing context window size"
-      ],
-      "correct": 1,
-      "explanation": "In long sequences, attention patterns can become diffuse and pick up spurious correlations. The subtraction in differential attention suppresses these shared diffuse patterns (which appear in both Q₁K₁ and Q₂K₂), sharpening the signal for the actual long-range relationships that differ between the two projections."
-    },
-    {
-      "stage": "post",
-      "question": "Why is differential attention particularly useful for complex reasoning tasks?",
-      "options": [
-        "Because it reduces model size",
-        "Because it makes training faster",
-        "Because these tasks require disentangling multiple pieces of information, and the subtraction operation helps separate signal from noise more effectively than standard attention",
-        "Because it is required for all tasks"
+        "Negative weights are clamped to zero by a post-attention ReLU, making them equivalent to zero attention on that token",
+        "Negative weights only appear during initialisation; the λ parameterisation ensures weights go positive after training convergence",
+        "Negative weights are valid because they act as inhibitory signals; the subsequent V-projection (O_W) absorbs the sign — the model learns to suppress irrelevant tokens through negative weighting rather than just de-emphasising them",
+        "The V matrix is constrained to be non-negative during training, so multiplying negative weights by V always yields a valid output"
       ],
       "correct": 2,
-      "explanation": "Complex reasoning involves tracking multiple relationships, some of which are relevant (signal) and some spurious (noise). Standard attention attends to everything. Differential attention's subtraction helps downweight the spurious patterns, making it easier for the model to focus on the genuine reasoning-relevant dependencies."
+      "explanation": "Standard attention weights are non-negative (they come from softmax), but differential attention weights can be negative after subtraction. This is intentional: negative weight on a position means 'actively suppress this token's contribution,' which is stronger than simply giving it near-zero weight. The output projection (O_W) in the attention block is a linear map that handles signed values naturally, so negative attention weights are fully valid."
+    },
+    {
+      "stage": "post",
+      "question": "Step 5 of the Build code computes the parameter-count delta for a 4096-hidden, 32-head model between baseline, DIFF V1, and DIFF V2. In V2, which component gains parameters relative to the baseline Transformer, and what did V1 use for training stability that V2 removed and why?",
+      "options": [
+        "V adds parameters in V2 (doubled for both branches); V1 used per-head RMSNorm which was removed in V2 because it was redundant with LayerNorm in the MLP block",
+        "The Q projection approximately doubles in V2 (extra hidden×hidden parameters); V1 used per-head RMSNorm to stabilise the subtraction but it destabilised late training at 70B+ scale so V2 replaced it with a simpler initialisation scheme",
+        "K adds parameters in V2 because two separate K projections are needed; V1's RMSNorm was removed because FlashAttention's fused kernel cannot accommodate it",
+        "Lambda parameters quadruple in V2 due to the doubled Q heads; V1's RMSNorm was unnecessary because lambda is bounded between 0 and 1 by construction"
+      ],
+      "correct": 1,
+      "explanation": "V2 doubles the Q projection from hidden×hidden to 2×hidden×hidden (extra Q heads); K and V stay the same size. The extra output from the doubled Q is projected back down to hidden size before O_W, adding roughly hidden×hidden parameters in the out-projection. V1's per-head RMSNorm stabilised the (A1 − λ·A2) subtraction at small scale but caused divergence during long 70B+ pre-training runs; V2's initialisation scheme achieves the same stability."
     }
   ]
 }

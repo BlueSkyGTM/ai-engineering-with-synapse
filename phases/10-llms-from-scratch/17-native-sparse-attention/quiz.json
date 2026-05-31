@@ -4,75 +4,75 @@
   "questions": [
     {
       "stage": "pre",
-      "question": "What is the fundamental trade-off in native sparse attention?",
+      "question": "At 64K-token context, what fraction of total decode latency does the NSA paper attribute to attention, and why does this make sparse attention an infrastructure-level priority rather than a research curiosity?",
       "options": [
-        "Increasing model size to improve accuracy",
-        "Reducing KV cache memory and compute cost while maintaining model quality by attending only to the most relevant tokens",
-        "Removing all attention mechanisms",
-        "Using only local attention patterns"
-      ],
-      "correct": 1,
-      "explanation": "Native sparse attention (like DeepSeek NSA) doesn't just approximate attention—it replaces dense attention with hardware-aligned sparse patterns that explicitly attend only to relevant tokens. This dramatically reduces memory and compute while preserving the ability to capture long-range dependencies."
-    },
-    {
-      "stage": "check",
-      "question": "What are the three parallel paths in DeepSeek NSA's architecture?",
-      "options": [
-        "Self-attention, cross-attention, and feed-forward",
-        "Encoding, decoding, and attention",
-        "Compression path, selection path, and sliding window path",
-        "Input, hidden, and output layers"
-      ],
-      "correct": 2,
-      "explanation": "The three-path architecture is the core of DeepSeek NSA: the compression path compresses the sequence, the selection path picks relevant tokens based on queries, and the sliding window path handles local context. Their outputs are merged, giving the model both efficiency and the ability to capture different types of dependencies."
-    },
-    {
-      "stage": "check",
-      "question": "How does the sliding window path differ from the other two paths?",
-      "options": [
-        "It is only used during training",
-        "It attends to all tokens in the sequence",
-        "It uses a different attention mechanism entirely",
-        "It attends only to tokens within a fixed-size window around each position, handling local dependencies efficiently"
+        "About 10–15% — notable but not the dominant bottleneck; compute-bound FFN layers still dominate",
+        "About 30–40% — significant enough to warrant optimisation after other bottlenecks are addressed",
+        "About 50% — at the halfway point where sparse attention breaks even with optimised dense attention",
+        "About 70–80% — attention dominates, so every downstream metric (TTFT, tokens/sec, cost per million tokens) is bounded by how fast you can serve attention at long context"
       ],
       "correct": 3,
-      "explanation": "The sliding window path is straightforward: for each position, it attends only to tokens within a window of size K (e.g., ±4 tokens). This captures local patterns cheaply and is hardware-friendly because the attention matrix is sparse with a predictable banded structure."
+      "explanation": "The NSA paper (Yuan et al., ACL 2025 Best Paper) measured 70–80% of decode latency in attention at 64K context. When one operation consumes 4/5 of all compute, no amount of FFN or embedding optimisation can move the needle — you must fix attention. This is why NSA's 9× speedup over FlashAttention at 64K translates directly to ~7× overall decode speedup."
     },
     {
       "stage": "check",
-      "question": "What makes native sparse attention hardware-aligned?",
+      "question": "NSA runs three parallel attention branches for each query. Match each branch to its purpose and the type of context it captures.",
       "options": [
-        "The sparse patterns are designed to map efficiently to GPU memory layouts and thread block execution, avoiding random memory access",
-        "It runs on CPU instead of GPU",
-        "It uses specialized hardware",
-        "It requires less training data"
+        "Compressed branch = coarse global context via block-averaged summary tokens; Selected branch = fine-grained attention on the top-k most relevant blocks; Sliding-window branch = local context for the most recent W tokens",
+        "Compressed branch = recent local tokens in sliding window; Selected branch = global coarse summary; Sliding-window branch = top-k relevant sparse blocks",
+        "All three branches capture identical context at different compression ratios; the gate learns which ratio is best per query",
+        "Compressed branch = top-k relevant blocks; Selected branch = recent local tokens; Sliding-window branch = full-sequence coarse summary"
       ],
       "correct": 0,
-      "explanation": "Dense attention's O(n²) memory causes thrashing on GPUs. Native sparse patterns like NSA's are designed so that the tokens being attended to are predictable and contiguous in memory. This allows efficient memory access patterns and thread block execution, making the sparse operations run fast on standard GPU hardware."
+      "explanation": "NSA's three branches cover different receptive fields: (1) Compressed — the entire sequence but averaged into N/l block summaries, giving cheap global awareness; (2) Selected — the full uncompressed tokens from the k blocks with the highest compressed-branch scores, giving precise fine-grained retrieval; (3) Sliding window — the last W tokens for local coherence. The gate weights their contributions per position."
     },
     {
-      "stage": "post",
-      "question": "How much KV cache reduction can native sparse attention achieve compared to dense attention?",
+      "stage": "check",
+      "question": "Prior sparse-attention methods (H2O, StreamingLLM) pruned the KV cache at inference time but underperformed NSA. What makes NSA 'natively trainable' where inference-time pruning is not?",
       "options": [
-        "No reduction in memory usage",
-        "Up to 90% or more, depending on the sequence length and sparsity configuration",
-        "Only 10-20% reduction",
-        "Memory usage increases slightly"
-      ],
-      "correct": 1,
-      "explanation": "Since each position attends only to a subset of tokens (often O(√n) or O(log n) instead of O(n)), the KV cache stores far fewer key-value vectors per position. For long sequences, this can reduce memory by an order of magnitude, enabling much longer contexts or larger batch sizes on the same hardware."
-    },
-    {
-      "stage": "post",
-      "question": "Why is native sparse attention considered 'native' rather than an approximation?",
-      "options": [
-        "Because it was invented by DeepSeek",
-        "Because it only works with native language models",
-        "Because it replaces the dense attention operation entirely with a designed sparse mechanism, rather than approximating dense attention with pruning",
-        "Because it uses native Python code"
+        "NSA uses a fixed block-sparse pattern expressible as a standard causal mask, making gradient computation straightforward",
+        "The top-k block selection is replaced with a differentiable soft-selection during training and hardened to discrete top-k at inference",
+        "Gradients flow through the differentiable compressed-branch attention, which also determines the top-k selection — the model learns to route information through the sparse pattern from the start of pre-training, not as an overlay on dense-attention weights",
+        "NSA uses special scale-and-shift position embeddings that allow the model to learn which tokens to route without any discrete selection operation"
       ],
       "correct": 2,
-      "explanation": "Approaches like pruning approximate dense attention by removing low-weight connections after computing them. Native sparse attention (like NSA) never computes the dense matrix at all—it explicitly defines which tokens to attend to using learned patterns. This is a fundamentally different computational graph, not an approximation of dense attention."
+      "explanation": "H2O and StreamingLLM prune the KV cache of a model trained expecting to attend to all tokens — the weights have no incentive to route information to accommodate the pruning pattern. NSA's compressed branch is a differentiable attention over the entire sequence; its scores drive the top-k selection. Gradients flow through compressed-branch scores end-to-end, so the model learns during pre-training to put the information NSA needs into the selected blocks."
+    },
+    {
+      "stage": "check",
+      "question": "At N=64K context with l=64 (compression blocks), k=16 (top-k), b=64 (selected block size), w=512 (sliding window), NSA sees 1000+1024+512=2536 keys per query vs 64000 for full attention. The doc says the savings ratio grows with sequence length. Why?",
+      "options": [
+        "At longer sequences fewer blocks qualify for top-k selection, automatically reducing the selected-branch key count",
+        "The compressed-branch cost is O(N/l); the selected and sliding branches are O(k·b) and O(w), both constants — as N doubles the compressed branch doubles but the total grows more slowly than O(N), widening the ratio",
+        "The sliding window W is automatically expanded at longer contexts, but its cost grows sub-linearly because tokens repeat",
+        "At longer sequences the gate MLP learns to down-weight the selected branch, reducing the k·b key loads proportionally"
+      ],
+      "correct": 1,
+      "explanation": "Full attention cost is O(N). NSA cost = O(N/l) + O(k·b) + O(w). At 64K: 1000 + 1024 + 512 = 2536 (25× reduction). At 128K: 2000 + 1024 + 512 = 3536 (36× reduction). The selected and sliding terms are constant in N; only the compressed branch grows — but it grows as N/l not N. So the ratio NSA/full shrinks as N grows, and the savings ratio (full/NSA) grows. The paper shows this benefit scaling linearly with sequence length."
+    },
+    {
+      "stage": "post",
+      "question": "The Build code Step 6 on a 1024-token synthetic with l=32, k=4, w=128 prints NSA sees 288 keys vs 1024 for full attention. Account for where the 288 comes from.",
+      "options": [
+        "Compressed branch: 1024/32 = 32 block summaries; Selected branch: k×b = 4×32 = 128 fine-grained tokens; Sliding window: w = 128 recent tokens. Total: 32+128+128 = 288",
+        "Compressed branch: k×b = 4×32 = 128; Selected branch: 1024/32 = 32; Sliding window: 128. Total: 128+32+128 = 288",
+        "Compressed branch: w = 128; Selected branch: 1024/32 = 32; Sliding window: k×b = 128. Total: 128+32+128 = 288",
+        "All 288 come from the compressed branch at three different compression ratios: 32+128+128 = 288"
+      ],
+      "correct": 0,
+      "explanation": "N/l = 1024/32 = 32 compressed block summaries for the compressed branch. k×b = 4 selected blocks × 32 tokens each = 128 fine-grained tokens for the selected branch. w = 128 most recent tokens for the sliding window. 32+128+128 = 288 total keys per query, versus 1024 for full attention — a 3.5× reduction even at short context. At 64K this ratio grows to 25× and at 128K to 36×."
+    },
+    {
+      "stage": "post",
+      "question": "The doc distinguishes NSA from MoBA (Moonshot, arXiv:2502.13189) as 'the two architectures to know for 2026 long-context pre-training.' Both use three branches or block-level routing. What is the conceptual lineage each draws from, and when does the doc say you should NOT reach for NSA?",
+      "options": [
+        "NSA draws from sparse attention research (Longformer, BigBird); MoBA draws from Mixture-of-Experts. Avoid NSA when context is always under 16K or when serving existing dense-attention weights that were not pre-trained with NSA",
+        "NSA draws from diffusion models; MoBA draws from FlashAttention. Avoid NSA for batch-1 CPU deployments",
+        "NSA draws from KV cache pruning; MoBA draws from residual VQ tokenisation. Avoid NSA when using speculative decoding",
+        "NSA and MoBA share identical conceptual lineage from routing transformers; avoid NSA when using GQA because the two are incompatible"
+      ],
+      "correct": 0,
+      "explanation": "NSA is the sparse-attention line (Longformer → BigBird → NSA with learned sparsity); MoBA applies the MoE principle (mixture of experts) to attention blocks. The doc's 'When not to' section: NSA requires continued training to retrofit on an existing model (cannot bolt on at inference like KV pruning), doesn't help below 16K (three-branch overhead dominates savings), and is not justified for batch-1 interactive short-context chat."
     }
   ]
 }

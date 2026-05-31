@@ -4,75 +4,75 @@
   "questions": [
     {
       "stage": "pre",
-      "question": "What generation-order problem hurt early pixel-by-pixel or raster-order image autoregression?",
+      "question": "PixelRNN and DALL-E 1 both used autoregressive generation for images but scaled worse than GPT-on-text. What was the core generation-order problem they shared?",
       "options": [
-        "Raster order is too fast for GPUs",
-        "Early spatial positions must commit before later context exists, so quality scaled poorly compared to text GPTs",
-        "VQ codebooks cannot represent color",
-        "Diffusion models cannot be trained on ImageNet"
-      ],
-      "correct": 1,
-      "explanation": "A 1D visit order over a 2D grid forces corner pixels to decide before the global image structure is known—VAR changes the unit of prediction from single tokens to whole scales."
-    },
-    {
-      "stage": "check",
-      "question": "In VAR, what is predicted at each autoregressive step during generation?",
-      "options": [
-        "A single continuous noise vector for the full image",
-        "One RGB pixel at a time in row-major order only",
-        "The entire token grid at the next resolution scale, conditioned on all coarser scales",
-        "Only the final high-resolution scale without coarse stages"
+        "They required per-pixel positional embeddings that grew prohibitively large at high resolution",
+        "Their VQ codebooks were too small to capture image diversity, forcing repeated sampling",
+        "Visiting pixels or tokens in raster (1D) order forces early tokens to commit without any global image context, breaking the predictable scaling relationship seen in language models",
+        "They used recurrent architectures that prevented parallelism during training, throttling compute scaling"
       ],
       "correct": 2,
-      "explanation": "Generation runs z₁ (e.g. 1×1), then z₂ (2×2), then finer scales up to K; each scale is produced in one forward pass with parallel prediction within the scale."
+      "explanation": "In raster order, the top-left corner token is generated with no knowledge of what the full image will look like. This 'early commitment' breaks the coarse-to-fine inductive bias that image statistics have. VAR fixes this by predicting an entire scale at once, conditioning each scale on all prior (coarser) scales — the model always has global context before generating fine details."
     },
     {
       "stage": "check",
-      "question": "How does the multi-scale VQ tokenizer represent an image latent?",
+      "question": "VAR uses a multi-scale residual VQ tokenizer that produces K token grids z_1, z_2, ..., z_K. The decoder reconstructs the image as sum(upsample(embed(z_k))) over all k. Why is this called 'residual' VQ?",
       "options": [
-        "Per-pixel softmax without a codebook",
-        "A single 8×8 codebook with no coarse levels",
-        "Continuous flow matching in pixel space only",
-        "Residual token grids at increasing resolution whose embedded sum reconstructs the latent, trained once then frozen"
+        "Each scale uses an independent codebook trained to minimise the reconstruction residual of the previous scale's codebook",
+        "Each scale's tokens encode what the coarser scales missed — scale k captures the residual left by scales 1..k-1 — so the decoder reconstructs by summing all scale embeddings",
+        "Residual connections bypass certain scale levels to prevent codebook collapse at small codebook sizes",
+        "The tokenizer is a residual neural network that adds Gaussian noise at each scale for regularisation"
+      ],
+      "correct": 1,
+      "explanation": "The multi-scale VQ tokenizer is trained so that summing the upsampled embeddings across all scales reconstructs the original latent. Scale 1 (1×1) captures the coarsest summary; each subsequent scale z_k captures what scales 1..k-1 left unrepresented. This residual decomposition means the generative model only has to predict the incremental residual at each step, not the full image from scratch."
+    },
+    {
+      "stage": "check",
+      "question": "Within a single scale k, VAR generates all tokens in one transformer forward pass — parallel, not sequential. Why is this valid when standard GPT-style AR cannot generate tokens in parallel?",
+      "options": [
+        "VAR uses bidirectional attention within each scale, trading causality for speed at the cost of quality",
+        "All scale-k tokens share the same positional embedding so their logits are identical and can be sampled once",
+        "VAR uses a separate non-autoregressive decoder per scale, trained independently with masked language modelling",
+        "All tokens at scale k condition on the same prior-scale context (scales 1..k-1) and have no sequential dependency on each other within the scale"
       ],
       "correct": 3,
-      "explanation": "Each scale captures what prior scales missed; embeddings are upsampled and summed before the decoder—same codebook across scales, residual VQ style."
+      "explanation": "The autoregressive dependency in VAR is across scales (scale k depends on scales 1..k-1), not within a scale. Every token at scale k conditions on exactly the same set of prior-scale tokens, so they can be sampled simultaneously in one forward pass. This reduces K-scale generation to K transformer calls instead of K × (tokens per scale) sequential calls."
     },
     {
       "stage": "check",
-      "question": "Why can VAR attend within a scale without strict intra-scale causality?",
+      "question": "The Tian et al. 2024 VAR paper claimed a property for image generation that no prior image AR model had demonstrated. What was it, and why did the paper treat it as significant?",
       "options": [
-        "All positions at scale k are predicted jointly in parallel because causality is defined across scales, not left-to-right within the grid",
-        "VAR uses bidirectional attention to future image pixels in time",
-        "Scale k tokens never attend to scale k−1",
-        "Attention is disabled within each scale"
+        "VAR achieved zero-shot text-to-image generation without CLIP supervision, surprising the community",
+        "VAR's FID on ImageNet follows a power-law scaling curve with compute — the same predictable relationship GPT has with perplexity — making generation quality forecastable from compute",
+        "VAR trained 10× faster than DiT at matched parameter counts due to the multi-scale tokeniser's compressed token sequence",
+        "VAR's per-scale parallelism allowed it to use diffusion-style noise schedules within each scale, combining two paradigms"
       ],
       "correct": 0,
-      "explanation": "Causality is in scale order: tokens at scale k see all of scales 1..k. Within-scale parallelism is the main latency win versus per-token image AR."
+      "explanation": "The power-law scaling result was VAR's headline claim: FID ∝ compute^(-exponent), just like language models. This is significant because it means you can predict how much better the model gets by spending more compute — no guessing. Prior image AR models (PixelCNN, VQVAE-based) did not exhibit this clean scaling, so VAR was the first image generation approach to match language models on predictable scaling behaviour."
     },
     {
       "stage": "post",
-      "question": "What scaling-law result did Tian et al. report for VAR on ImageNet?",
+      "question": "The Build code implements a scale-structured attention mask where tokens at scale k attend to all tokens at scales 1..k but not k+1 onward. Which standard causal masking property does this mirror, and what intra-scale pattern does it enforce?",
       "options": [
-        "VAR cannot be trained beyond 1M parameters",
-        "FID improves predictably with compute/parameters like GPT perplexity—power-law behavior for image generation",
-        "FID is independent of model size",
-        "VAR only works on text, not class-conditional images"
-      ],
-      "correct": 1,
-      "explanation": "VAR was among the first image generators to show clean compute-to-FID scaling, making budgeted quality targets more predictable than per-architecture tuning alone."
-    },
-    {
-      "stage": "post",
-      "question": "Compared to diffusion at inference, what is VAR’s typical pass structure on a 256×256 image in this lesson’s framing?",
-      "options": [
-        "A single forward with no tokenizer",
-        "Thousands of per-pixel steps identical to PixelCNN",
-        "About K scale steps (e.g. ~10 forwards) with parallel tokens per scale, versus many sequential denoising steps for DiT-class models",
-        "Only adversarial discriminator updates at inference"
+        "It mirrors decoder-only causal masking; within scale k tokens attend to each other autoregressively in row-major order",
+        "It mirrors encoder-only bidirectional attention; within scale k tokens attend to all prior scales plus each other bidirectionally",
+        "It mirrors decoder-only causal masking across scales; within a scale all tokens share the same prior-scale context so the mask is fully dense — no intra-scale causality",
+        "It mirrors prefix language modelling; scale 1 is the prefix (attended to fully) while later scales are the completion (causal within each scale)"
       ],
       "correct": 2,
-      "explanation": "VAR trades many fine-grained denoising iterations for fewer coarse-to-fine scale passes; each pass fills a full grid at that resolution, which is why inference can beat DiT on pass count at matched budgets."
+      "explanation": "Scale order is causal: scale k can see scales 1..k-1 but not k+1..K. This is the same pattern as token order in a causal LM. Within a scale, however, all tokens attend to the same prior-scale context and have no ordering constraint — the mask is fully dense intra-scale, enabling one-shot parallel generation per scale. The code's attention mask encodes this by treating all scale-k positions as if they arrived simultaneously."
+    },
+    {
+      "stage": "post",
+      "question": "The doc compares VAR to diffusion (DDPM/DiT) on two axes: number of generation passes and what each pass produces. For a 256×256 image, VAR uses K=10 scale passes and DiT uses 28–50 denoising steps. What does VAR produce per pass that DiT cannot, and what inference-speed conclusion does the paper draw?",
+      "options": [
+        "DiT produces a full-resolution image at each step but at lower quality; VAR produces full resolution immediately but must refine over K steps — they are equivalent in speed",
+        "VAR produces an entire spatial scale (all tokens at resolution 2^k × 2^k) in one pass in parallel; DiT produces a small noise increment across the full image — VAR needs fewer passes and each pass is parallel within scale, making inference faster",
+        "Both methods produce the same number of total tokens per pass; VAR is faster only because its transformer is smaller than DiT",
+        "VAR produces higher-resolution tokens per pass than DiT, but DiT compensates by using fewer total steps, so they have equal FID at the same wall-clock time"
+      ],
+      "correct": 1,
+      "explanation": "Each VAR pass generates an entire scale's token grid in parallel — at scale k=5 it outputs 4×4=16 tokens simultaneously. Each DiT denoising step processes the full spatial resolution but makes only a small noise correction. VAR uses ~10 passes vs DiT's 28–50, and each VAR pass is parallel within scale. The paper reports that VAR matches or beats DiT on class-conditional ImageNet at the same compute budget."
     }
   ]
 }
