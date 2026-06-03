@@ -28,7 +28,9 @@
   const shippedList = allCapstones.filter((c) => c.done);
   const lockedCount = allCapstones.length - shippedList.length;
 
-  $('#capcount').textContent = `${shippedList.length} / ${allCapstones.length} shipped`;
+  $('#capcount').textContent = shippedList.length === 0
+    ? `${allCapstones.length} builds total · none shipped yet`
+    : `${shippedList.length} of ${allCapstones.length} shipped`;
 
   /* render only shipped cards */
   const tiles = shippedList.map(({ ph, l }) => {
