@@ -1,65 +1,56 @@
-# Build modern AI, by hand.
+# Epoch Academy
 
-Not tutorials. Not YouTube. Every algorithm written from scratch — tensors, backprop,
-transformers, RAG, agents. Twenty chapters of AI engineering done the hard way,
-inside Claude Code.
+> Build modern AI, by hand.
 
-Built on top of [AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch)
-by Rohit Ghumare, with a full personal learning dashboard, gamification system,
-and WordPress integration added on top.
+A personal learning dashboard built on top of [AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch) by Rohit Ghumare — one of the most thorough open-source AI engineering curricula that exists (27,000+ stars, MIT licensed).
+
+The curriculum is his. The dashboard is mine.
 
 ---
 
-## Twenty chapters. 470+ lessons. Everything you've done and everything left.
+## What the upstream curriculum is
 
-| Chapter | What you build |
-|---------|---------------|
-| 00 Setup & Tooling | Dev environment, GPU setup, APIs, Python toolchain |
-| 01 Math Foundations | Linear algebra, calculus, probability, PCA + variance decomposition |
-| 02 ML Fundamentals | Regression, classification, loss surfaces, gradient descent from scratch |
-| 03 Deep Learning Core | Backprop by hand, activations, regularisation |
-| 04 Computer Vision | CNNs, object detection, full vision pipeline capstone |
-| 05 NLP: Foundations → Advanced | Tokenisation, embeddings, sequence models |
-| 06 Speech & Audio | Spectrograms, ASR, audio feature extraction |
-| 07 Transformers Deep Dive | Attention mechanism, multi-head, positional encoding — transformer from scratch |
-| 08 Generative AI | GANs, diffusion, CLIP |
-| 09 Reinforcement Learning | Policy gradients, Q-learning, environment loops |
-| 10 LLMs from Scratch | Pre-training, tokenisation, scaling laws |
-| 11 LLM Engineering | Fine-tuning, RLHF, evaluation, inference optimisation |
-| 12 Multimodal AI | Vision-language models, multimodal agent capstone |
-| 13 Tools & Protocols | MCP, tool use, function calling, tool ecosystem capstone |
-| 14 Agent Engineering | ReAct, planning, memory, agent workbench capstone |
-| 15 Autonomous Systems | Long-horizon agents, evaluation frameworks |
-| 16 Multi-Agent & Swarms | Coordination, parallelism, swarm patterns |
-| 17 Infrastructure & Production | Serving, monitoring, deployment pipelines |
-| 18 Ethics, Safety & Alignment | Red-teaming, constitutional AI, safety evals |
-| 19 Capstone Projects | 55 final builds — one per concept cluster |
+Rohit built 503 lessons across 20 phases — ~320 hours of AI engineering from linear algebra through autonomous agent swarms. Python, TypeScript, Rust, Julia. Every lesson follows the same six-beat structure:
 
-**Languages:** Python · TypeScript · Rust · Julia
+```
+MOTTO → PROBLEM → CONCEPT → BUILD IT → USE IT → SHIP IT
+```
+
+The "Build It / Use It" split is the core idea: you implement the algorithm from raw math first, then run the same thing through PyTorch or scikit-learn. By the time the framework shows up, you already know what it's doing. 1,109 quiz questions across 200 lesson files are included. No hand-holding, no five-minute videos.
+
+The full curriculum lives at: https://github.com/rohitg00/ai-engineering-from-scratch
 
 ---
 
-## What I added
+## What I built on top
 
-The upstream repo is a curriculum. Everything below was built on top of it.
+Everything in `site-new/` is original. No framework. No build step. Opens directly in a browser.
 
-### Learning dashboard (`site-new/`)
-
-Six pages. No framework. No build step. Every page derives its UI from one pure function
-over the curriculum data.
+### Six-page dashboard
 
 | Page | What it does |
 |------|-------------|
-| **Course** | 20-chapter accordion, per-lesson ticks, live XP bar and rank |
-| **Catalog** | 470+ lessons searchable by name, language, chapter, type |
-| **Projects** | All 60 capstone builds — locked with descriptions, gold when shipped |
-| **Library** | Curated free reading — math, ML, LLMs, Rust, production |
-| **Glossary** | 83 flip cards. What people say vs what it actually means |
-| **Home** | Navigation hub linking every section |
+| **Course** | 20-chapter accordion. Per-lesson tick boxes. Live XP bar and rank. |
+| **Catalog** | All 498 indexed lessons. Filter by chapter, type, language, or search by name. Rows fully clickable — opens the lesson reader. |
+| **Lesson reader** | Fetches and renders lesson markdown from GitHub. Sidebar shows all lessons in the current chapter with completion state. Prev/next navigation. |
+| **Projects** | Every capstone build surfaced from every chapter — not just Phase 19. 60 builds, locked until you complete the lesson. |
+| **Library** | 110 curated free resources — books, videos, papers, courses, articles, and interactive tools — with topic and type filtering. |
+| **Glossary** | 83 flip cards. What people say vs what it actually means. |
 
-### Progress system
+### Claude Code integration
 
-Every lesson tick earns XP. Level cost rises each level. Seven ranks unlock as you go:
+Each lesson has a `$ copy path` button that puts a ready-to-paste prompt on your clipboard:
+
+```
+I'm working on this lesson: phases/07-transformers-deep-dive/01-attention-mechanism
+Read phases/07-transformers-deep-dive/01-attention-mechanism/docs/en.md and help me work through it.
+```
+
+Paste directly into Claude Code. No hunting for file paths.
+
+### Progress and gamification
+
+Every lesson tick earns XP. Level cost rises each level. Seven ranks unlock across 20 levels:
 
 ```
 LV.01–03  Initiate          LV.10–12  AI Engineer
@@ -68,48 +59,52 @@ LV.07–09  Apprentice Eng.   LV.16–18  Staff Engineer
                             LV.19+    AI Architect
 ```
 
-`game.js` is a pure function — curriculum + progress in, all stats out.
-No DOM, no side effects. Re-runs on every tick.
+`game.js` is a pure function — curriculum + progress in, all stats out. No DOM, no side effects.
 
 ### WordPress integration
 
-Progress persists to `/wp-json/aischool/v1/progress` when a nonce is present.
-Falls back to localStorage silently. One-line backend swap — no screen code changes:
+Progress persists to `/wp-json/aischool/v1/progress` when a nonce is present. Falls back to localStorage silently. Zero screen code changes when switching backends.
 
-```js
-Store.adapter = restAdapter;
-```
+---
 
-### Toolchain
+## Curriculum chapters
 
-Built using [gstack](https://github.com/garrytan/gstack) — structured AI workflows
-for `/design-review`, `/qa`, `/investigate`, and `/ship` directly from Claude Code.
+| Chapter | What you implement |
+|---------|-------------------|
+| 00 Setup & Tooling | Dev environment, GPU setup, APIs, Python toolchain |
+| 01 Math Foundations | Linear algebra, calculus, probability, PCA, variance decomposition |
+| 02 ML Fundamentals | Regression, classification, loss surfaces, gradient descent from scratch |
+| 03 Deep Learning Core | Backprop by hand, activations, regularisation |
+| 04 Computer Vision | CNNs, object detection, full vision pipeline |
+| 05 NLP | Tokenisation, embeddings, sequence models |
+| 06 Speech & Audio | Spectrograms, ASR, audio feature extraction |
+| 07 Transformers Deep Dive | Attention, multi-head, positional encoding — transformer from scratch |
+| 08 Generative AI | GANs, diffusion, CLIP |
+| 09 Reinforcement Learning | Policy gradients, Q-learning, environment loops |
+| 10 LLMs from Scratch | Pre-training, tokenisation, scaling laws |
+| 11 LLM Engineering | Fine-tuning, RLHF, evaluation, inference optimisation |
+| 12 Multimodal AI | Vision-language models, multimodal agent |
+| 13 Tools & Protocols | MCP, tool use, function calling |
+| 14 Agent Engineering | ReAct, planning, memory, agent workbench |
+| 15 Autonomous Systems | Long-horizon agents, evaluation frameworks |
+| 16 Multi-Agent & Swarms | Coordination, parallelism, swarm patterns |
+| 17 Infrastructure & Production | Serving, monitoring, deployment pipelines |
+| 18 Ethics, Safety & Alignment | Red-teaming, constitutional AI, safety evals |
+| 19 Capstone Projects | 85 final builds across all major concept clusters |
+
+**Languages:** Python · TypeScript · Rust · Julia
 
 ---
 
 ## Engineering decisions
 
-**No framework.** Personal tooling should outlive framework churn.
-Files open directly in a browser. No node_modules, no build step, no config.
+**No framework.** Files open directly in a browser. No node_modules, no build step, no config. Personal tooling should outlive framework churn.
 
-**Data-driven.** `PHASES` is the curriculum. Every page calls
-`game.derive(PHASES, store.load())`. Adding a stat means editing data, not components.
+**Single source of truth.** `PHASES` is the curriculum. Every page derives its UI from `game.derive(PHASES, store.load())`. Adding a stat means editing data, not components.
 
-**Pure game engine.** `game.js` works in a browser, a test runner, or Node —
-same function, same output, no imports required.
+**Adapter pattern.** localStorage and WordPress REST implement the same three-method interface. Swapping backends touches zero screen code.
 
-**Adapter pattern.** localStorage and WordPress REST implement the same three-method
-interface. Swapping backends touches zero screen code.
-
----
-
-## What's coming
-
-- **200+ quizzes** — per-lesson knowledge checks in the lesson reader
-- **Graphify** — interactive prerequisite DAG: click any chapter, see what it needs and what it unlocks
-- **Made With ML content** — practitioner exercises from [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML)
-- **PCA + variance explorer** — interactive visualisations for the Math Foundations chapter
-- **In-site lesson reader** — render lesson markdown without leaving the dashboard
+**Pure game engine.** `game.js` works in a browser, a test runner, or Node — same function, same output, no imports.
 
 ---
 
@@ -118,7 +113,7 @@ interface. Swapping backends touches zero screen code.
 ```bash
 cd site-new
 python3 -m http.server 8080
-# http://localhost:8080
+# open http://localhost:8080
 ```
 
 No install. No build. No config.
@@ -127,11 +122,11 @@ No install. No build. No config.
 
 ## Credits
 
-| Repo | What it contributed |
-|------|-------------------|
-| [rohitg00/ai-engineering-from-scratch](https://github.com/rohitg00/ai-engineering-from-scratch) | Source curriculum — chapters, lessons, capstone structure |
-| [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML) | Practitioner-level content and references |
-| [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books) | Library curation |
+| | |
+|--|--|
+| [rohitg00/ai-engineering-from-scratch](https://github.com/rohitg00/ai-engineering-from-scratch) | The curriculum — all 503 lessons, 1,109 quiz questions, the six-beat lesson format, phase architecture |
+| [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML) | Queued for integration — practitioner-level MLOps exercises staged in `ai-school-expansion/` |
+| [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books) | Library curation source |
+| [garrytan/gstack](https://github.com/garrytan/gstack) | Toolchain used throughout development — `/qa`, `/design-review`, `/investigate`, `/browse` |
 
-All used with full permission. The dashboard, gamification, and WordPress integration
-were built from scratch.
+The dashboard, progress system, lesson reader, library, glossary, WordPress integration, and Claude Code integration were built from scratch.
