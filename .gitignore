@@ -59,3 +59,7 @@ mlruns/
 .link-cache.json
 catalog.json
 .agents/
+
+quiz-factory.zip
+REPO_SCAN_REPORT.md
+GRAPHIFY_AUDIT.md
