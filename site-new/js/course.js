@@ -27,10 +27,10 @@
 
     /* right panel: career stats */
     const rows = [
-      ['Lessons cleared',  s.lessonsDone,    s.lessonsDone / s.lessonsTotal],
-      ['Chapters cleared', s.phasesCleared,  s.phasesCleared / s.phasesTotal],
-      ['Languages',        `${s.languages}/${s.languagesTotal}`, s.languages / s.languagesTotal],
-      ['Build artifacts',  s.buildArtifacts, Math.min(1, s.buildArtifacts / 60)]
+      ['Lessons cleared',  `${s.lessonsDone}/${s.lessonsTotal}`,     s.lessonsDone / s.lessonsTotal],
+      ['Chapters cleared', `${s.phasesCleared}/${s.phasesTotal}`,    s.phasesCleared / s.phasesTotal],
+      ['Languages',        `${s.languages}/${s.languagesTotal}`,     s.languages / s.languagesTotal],
+      ['Build artifacts',  `${s.buildArtifacts}/${s.buildsTotal || 60}`, Math.min(1, s.buildArtifacts / (s.buildsTotal || 60))]
     ];
     $('#stats').replaceChildren(
       ...rows.map(([l, v, p]) => el('div', { class: 'stat' }, [
