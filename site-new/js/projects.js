@@ -10,28 +10,18 @@
   const { el } = ui;
   const $ = (s) => document.querySelector(s);
 
-  /* collect capstones from all chapters */
-  const allCapstones = [];
-  PHASES.forEach((ph) => {
-    const last = ph.lessons.length - 1;
-    ph.lessons.forEach((l, i) => {
-      const isTypeCap = l.type === 'Capstone';
-      const isFinalCap = i === last && (
-        (l.url  && l.url.toLowerCase().includes('capstone')) ||
-        (l.name && l.name.toLowerCase().includes('apstone'))
-      );
-      if (isTypeCap || isFinalCap) {
-        allCapstones.push({ ph, l, i, done: store.isDone(ph.id, i) });
-      }
-    });
-  });
+  /* Phase 19 is the capstone chapter — all its lessons are projects */
+  const phase19 = PHASES.find((p) => p.id === 19) || { lessons: [] };
+  const allCapstones = phase19.lessons.map((l, i) => ({
+    ph: phase19, l, i, done: store.isDone(phase19.id, i)
+  }));
 
   /* shipped first, then by chapter */
   allCapstones.sort((a, b) => (b.done - a.done) || (a.ph.id - b.ph.id));
 
   const shippedCount = allCapstones.filter((c) => c.done).length;
   $('#capcount').textContent = shippedCount === 0
-    ? `${allCapstones.length} builds · none shipped yet`
+    ? `${allCapstones.length} projects · none shipped yet`
     : `${shippedCount} of ${allCapstones.length} shipped`;
 
   const tiles = allCapstones.map(({ ph, l, i, done }) => {
