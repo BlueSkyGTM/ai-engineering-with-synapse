@@ -16,17 +16,18 @@
   ];
 
   let active = 'all';
+  let activeType = 'all';
 
   function bookRow(b) {
-    return el('a', { class: 'book', 'data-topic': b.topic, href: b.url, target: '_blank', rel: 'noopener' }, [
+    return el('a', { class: 'book', 'data-topic': b.topic, 'data-type': (b.type || 'Book'), href: b.url, target: '_blank', rel: 'noopener' }, [
       el('div', { class: 'book__info' }, [
         el('span', { class: 'book__title' }, b.title),
         el('div', { class: 'book__author' }, b.author),
         el('div', { class: 'book__note' }, b.note)
       ]),
       el('div', { class: 'book__meta' }, [
-        el('span', { class: 'book__topic' }, b.topic),
-        el('span', { class: 'book__format' }, b.format)
+        el('span', { class: 'book__type', 'data-type': (b.type || 'Book') }, b.type || 'Book'),
+        el('span', { class: 'book__topic' }, b.topic)
       ])
     ]);
   }
@@ -45,10 +46,10 @@
 
   function applyFilter() {
     document.querySelectorAll('.book').forEach((row) => {
-      const match = active === 'all' || row.getAttribute('data-topic') === active;
-      row.classList.toggle('is-hidden', !match);
+      const topicMatch = active === 'all' || row.getAttribute('data-topic') === active;
+      const typeMatch  = activeType === 'all' || row.getAttribute('data-type') === activeType;
+      row.classList.toggle('is-hidden', !(topicMatch && typeMatch));
     });
-    // hide tiers that have no visible rows
     document.querySelectorAll('.lib-tier').forEach((tier) => {
       const any = [...tier.querySelectorAll('.book')].some((r) => !r.classList.contains('is-hidden'));
       tier.classList.toggle('is-hidden', !any);
@@ -57,15 +58,20 @@
 
   function setFilter(topic) {
     active = topic;
-    document.querySelectorAll('.chip').forEach((c) => c.classList.toggle('is-on', c.getAttribute('data-topic') === topic));
+    document.querySelectorAll('#chips .chip').forEach((c) => c.classList.toggle('is-on', c.getAttribute('data-topic') === topic));
+    applyFilter();
+  }
+
+  function setTypeFilter(type) {
+    activeType = type;
+    document.querySelectorAll('#typeChips .chip').forEach((c) => c.classList.toggle('is-on', c.getAttribute('data-type') === type));
     applyFilter();
   }
 
   function render() {
-    // tiers
     $('#tiers').replaceChildren(...TIERS.map(tierBlock));
 
-    // topic chips (unique, sorted)
+    // topic chips
     const topics = new Set();
     TIERS.forEach((t) => (LIBRARY[t.key] || []).forEach((b) => topics.add(b.topic)));
     const chips = $('#chips');
@@ -73,8 +79,15 @@
     chips.replaceChildren(allChip, ...[...topics].sort().map((tp) => el('button', { class: 'chip', 'data-topic': tp }, tp)));
     chips.addEventListener('click', (e) => { const b = e.target.closest('.chip'); if (b) setFilter(b.getAttribute('data-topic')); });
 
+    // type chips
+    const types = ['Book', 'Course', 'Video', 'Paper', 'Article', 'Interactive'];
+    const typeChips = $('#typeChips');
+    const allType = el('button', { class: 'chip is-on', 'data-type': 'all' }, 'All types');
+    typeChips.replaceChildren(allType, ...types.map((tp) => el('button', { class: 'chip', 'data-type': tp }, tp)));
+    typeChips.addEventListener('click', (e) => { const b = e.target.closest('.chip'); if (b) setTypeFilter(b.getAttribute('data-type')); });
+
     const total = TIERS.reduce((n, t) => n + (LIBRARY[t.key] || []).length, 0);
-    $('#count').textContent = total + ' free resources';
+    $('#count').textContent = total + ' resources';
   }
 
   render();
