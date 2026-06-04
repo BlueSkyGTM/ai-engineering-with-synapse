@@ -15,18 +15,6 @@
       "explanation": "KV is O(1) on exact keys; vector is for similarity, graph is for relationships."
     },
     {
-      "stage": "pre",
-      "question": "What are the three stores Mem0 writes in parallel on each add()?",
-      "options": [
-        "Vector, KV, graph",
-        "Cache, queue, log",
-        "Postgres, Redis, ClickHouse",
-        "Embedding, attention, FFN"
-      ],
-      "correct": 0,
-      "explanation": "Mem0 fans every write out to vector, KV, and graph stores."
-    },
-    {
       "stage": "check",
       "question": "What three dimensions feed Mem0's fusion score?",
       "options": [
