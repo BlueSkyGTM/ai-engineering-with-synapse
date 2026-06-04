@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "Which hyperscaler's bet is described as exclusive partnership rather than marketplace?",
-      "options": [
-        "Azure OpenAI",
-        "Vertex AI",
-        "AWS Bedrock",
-        "OCI Generative AI"
-      ],
-      "correct": 0,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "Roughly what is the measured median TTFT gap between Azure OpenAI (with PTUs) and Bedrock on-demand on Llama 3.1 405B equivalents?",
       "options": [
