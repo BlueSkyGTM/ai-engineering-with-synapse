@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "Why is the sandbox configured with --network=none and bounded resource caps?",
-      "options": [
-        "To force the agent to use prompt caching",
-        "To enforce deterministic floating-point arithmetic",
-        "To allow GPU passthrough by default",
-        "To prevent network egress and contain experiment side effects within a reproducible envelope"
-      ],
-      "correct": 3,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "What is the role of the vision critique step in the writer loop?",
       "options": [
