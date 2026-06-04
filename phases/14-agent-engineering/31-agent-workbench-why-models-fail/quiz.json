@@ -15,18 +15,6 @@
       "explanation": "The model is not wrong about Python; it is wrong about the work. Surfaces around the model are missing."
     },
     {
-      "stage": "pre",
-      "question": "What are the seven workbench surfaces the lesson names?",
-      "options": [
-        "Instructions, state, scope, feedback, verification, review, handoff",
-        "Train, eval, deploy, monitor, retrain, scale, retire",
-        "Plan, act, reflect, refine, debate, vote, ship",
-        "Read, write, exec, fork, exit, wait, kill"
-      ],
-      "correct": 0,
-      "explanation": "The seven surfaces are instructions, state, scope, feedback, verification, review, handoff."
-    },
-    {
       "stage": "check",
       "question": "Which is NOT one of the eight distributed-systems primitives the lesson maps surfaces to?",
       "options": [
