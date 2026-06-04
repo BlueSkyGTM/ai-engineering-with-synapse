@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "Why does normalize run before substring and regex rules?",
-      "options": [
-        "Because regex is slower than substring",
-        "Because normalize lowers the file size on disk",
-        "Because normalize exposes hidden tokens such as base64, rot13, and zero-width insertions to the downstream rules",
-        "Because the standard library forbids running rules on the original text"
-      ],
-      "correct": 2,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "Given true positives = 6, false positives = 2 for category C, what is precision?",
       "options": [
@@ -72,6 +60,18 @@
         "Because the rules are stored as data"
       ],
       "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Why does normalize run before substring and regex rules?",
+      "options": [
+        "Because regex is slower than substring",
+        "Because normalize lowers the file size on disk",
+        "Because normalize exposes hidden tokens such as base64, rot13, and zero-width insertions to the downstream rules",
+        "Because the standard library forbids running rules on the original text"
+      ],
+      "correct": 2,
       "explanation": ""
     }
   ]
