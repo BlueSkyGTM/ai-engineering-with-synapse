@@ -15,18 +15,6 @@
       "explanation": "NIAH = needle in a haystack: plant a fact, ask the model to retrieve it, sweep depth and length."
     },
     {
-      "stage": "pre",
-      "question": "Why is the advertised context window often very different from the usable context?",
-      "options": [
-        "Attention degrades with length and task; spec-sheet maximums rarely hold under multi-hop or reasoning loads",
-        "Tokenizers truncate",
-        "Embeddings overflow",
-        "Beam search slows"
-      ],
-      "correct": 0,
-      "explanation": "Effective context for reasoning is usually 25-50% of the advertised max."
-    },
-    {
       "stage": "check",
       "question": "What does RULER add over NIAH?",
       "options": [
@@ -85,18 +73,6 @@
       ],
       "correct": 0,
       "explanation": "Distinguishing retrieval-effective from reasoning-effective length is essential for real-world claims."
-    },
-    {
-      "stage": "post",
-      "question": "Why measure time-to-first-token at long context lengths?",
-      "options": [
-        "1M-token prefills can take tens of seconds; accuracy alone hides product-impacting latency",
-        "Tokenization is slow",
-        "Required by RAG",
-        "Beam search depends on it"
-      ],
-      "correct": 0,
-      "explanation": "Long prompts have huge prefill costs; latency must be tracked alongside accuracy."
     }
   ]
 }
