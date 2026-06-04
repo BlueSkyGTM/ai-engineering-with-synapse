@@ -409,6 +409,19 @@
   .synapse-cta__step { flex-wrap: wrap; }
 }
 
+/* ---------- Flaws section ---------- */
+.flaws { border-top: 1px solid var(--line); padding: var(--s6) 0 var(--s5); }
+.flaws__eyebrow { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terra); margin-bottom: var(--s4); }
+.flaws__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--s4); }
+.flaw { padding: var(--s4); border-left: 2px solid var(--line); }
+.flaw__n { font-family: var(--pix); font-size: 1.8rem; color: var(--terra); line-height: 1; margin-bottom: var(--s2); opacity: 0.5; }
+.flaw__title { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream); margin-bottom: var(--s2); }
+.flaw__body { font-size: 0.82rem; color: var(--cream-dim); line-height: 1.65; }
+.flaw--lead { grid-column: 1 / -1; border-left-color: var(--terra); background: rgba(217,119,87,0.04); padding: var(--s5); }
+.flaw--lead .flaw__n { opacity: 1; }
+.flaw--lead .flaw__body { color: var(--cream); max-width: 640px; }
+@media (max-width: 720px) { .flaws__grid { grid-template-columns: 1fr; } }
+
 /* ---------- Fleet Engine context block (data-bar, no card/border) ---------- */
 .fleet-engine-context { border-top: 1px solid var(--line); padding: var(--s5) 0 var(--s5); margin-bottom: var(--s5); }
 .fleet-engine-context__label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-mute); margin-bottom: var(--s2); }
