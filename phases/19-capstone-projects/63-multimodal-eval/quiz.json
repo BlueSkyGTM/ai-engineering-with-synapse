@@ -15,39 +15,27 @@
       "explanation": "Loss minimization is necessary but not sufficient. Held-out metrics on three task surfaces measure what the model can actually do."
     },
     {
-      "stage": "pre",
-      "question": "What is R@5 measuring in a 100-sample retrieval eval?",
-      "options": [
-        "The fifth caption is always correct",
-        "Fraction of queries whose correct match lands in the top 5 retrieved candidates out of 100",
-        "Five percent accuracy",
-        "Five queries per second"
-      ],
-      "correct": 1,
-      "explanation": "R@K = fraction of queries with the target in the top K ranked candidates. Higher is better."
-    },
-    {
       "stage": "check",
       "question": "Why does BLEU-4 take the geometric mean of 1- to 4-gram precisions instead of the arithmetic mean?",
       "options": [
         "Arithmetic is slower",
-        "Geometric mean is zero if any n-gram precision is zero, which is the strict matching property BLEU wants; smoothing handles the zero case",
         "Geometric mean is bigger",
+        "Geometric mean is zero if any n-gram precision is zero, which is the strict matching property BLEU wants; smoothing handles the zero case",
         "PyTorch supports only geometric mean"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The geometric mean enforces that ALL n-gram orders contribute; a 4-gram precision of zero collapses the score before smoothing."
     },
     {
       "stage": "check",
       "question": "What does the brevity penalty in BLEU-4 protect against?",
       "options": [
-        "Long captions getting penalized",
         "Short captions gaming high precision by emitting only safe high-frequency tokens; BP < 1 when generated < reference length",
+        "Long captions getting penalized",
         "Memory leaks",
         "Tokenizer errors"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "Without BP a one-word caption matching one reference word would score 1.0. BP shrinks the score for too-short generations."
     },
     {
@@ -55,11 +43,11 @@
       "question": "Why does multi-reference BLEU usually score higher than single-reference BLEU on the same generation?",
       "options": [
         "The math is different",
-        "Each n-gram in the generation can match any reference, so the clipped count is higher when more references are available",
         "Single-reference is broken",
-        "References cost extra memory"
+        "References cost extra memory",
+        "Each n-gram in the generation can match any reference, so the clipped count is higher when more references are available"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "More references give the n-gram more chances to be matched; clipped counts grow and the precision rises."
     },
     {
@@ -73,6 +61,18 @@
       ],
       "correct": 1,
       "explanation": "VQA exact match is an integer comparison after the model emits its answer token; no embedding or similarity math involved."
+    },
+    {
+      "stage": "post",
+      "question": "What is R@5 measuring in a 100-sample retrieval eval?",
+      "options": [
+        "The fifth caption is always correct",
+        "Five percent accuracy",
+        "Fraction of queries whose correct match lands in the top 5 retrieved candidates out of 100",
+        "Five queries per second"
+      ],
+      "correct": 2,
+      "explanation": "R@K = fraction of queries with the target in the top K ranked candidates. Higher is better."
     }
   ]
 }
