@@ -14,7 +14,7 @@
   },
   {
     "id": "featsel-pre-2",
-    "stage": "pre",
+    "stage": "check",
     "question": "What is the key difference between filter and wrapper feature selection methods?",
     "options": [
       "Filter methods use a model to evaluate features; wrapper methods use statistics",
@@ -27,7 +27,7 @@
   },
   {
     "id": "featsel-post-1",
-    "stage": "post",
+    "stage": "check",
     "question": "Mutual information can detect relationships that Pearson correlation cannot. What kind?",
     "options": [
       "Linear relationships between continuous features",
@@ -37,6 +37,18 @@
     ],
     "correct": 1,
     "explanation": "Pearson correlation only measures linear association. A quadratic relationship (y = x^2) has zero correlation but high mutual information. MI captures any statistical dependency between variables."
+  },
+  {
+    "stage": "check",
+    "question": "Which of the following best describes: L1 regularization (embedded selection) with RFE (wrapper...?",
+    "options": [
+      "Compare L1 regularization (embedded selection) with RFE (wrapper selection) and...",
+      "filter methods (variance threshold, mutual information, chi-squared) and wrapper",
+      "why mutual information captures nonlinear feature-target relationships that corr",
+      "a feature selection pipeline that combines multiple methods and demonstrate impr"
+    ],
+    "correct": 0,
+    "explanation": "Compare L1 regularization (embedded selection) with RFE (wrapper selection) and evaluate their computational tradeoffs"
   },
   {
     "id": "featsel-post-2",
