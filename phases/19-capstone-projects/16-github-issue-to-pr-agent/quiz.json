@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "Why must the agent run with a short-lived GitHub App installation token rather than a personal access token?",
-      "options": [
-        "Apps avoid GitHub rate limits entirely",
-        "App tokens grant fine-grained, scoped, short-lived credentials suited for per-task workers",
-        "Personal access tokens cannot open PRs",
-        "Apps require less code than PATs"
-      ],
-      "correct": 1,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "Which two protections prevent the agent from clobbering main?",
       "options": [
