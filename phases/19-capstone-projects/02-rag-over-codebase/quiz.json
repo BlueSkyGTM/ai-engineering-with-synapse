@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "What does AST-aware chunking mean in the ingestion pipeline?",
-      "options": [
-        "Compressing chunks with gzip before storage",
-        "Dropping comments and whitespace before embedding",
-        "Cutting at tree-sitter node boundaries such as function and class spans",
-        "Splitting code into fixed 256-token windows"
-      ],
-      "correct": 2,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "Which three retrievable modalities does each chunk get in this pipeline?",
       "options": [
