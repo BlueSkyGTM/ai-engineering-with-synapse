@@ -15,18 +15,6 @@
       "explanation": "BoW cannot bind 'not' to the word it negates, so the classifier misses the polarity flip."
     },
     {
-      "stage": "pre",
-      "question": "What two steps make up classical sentiment analysis?",
-      "options": [
-        "Translate, then classify",
-        "Embed, then cluster",
-        "Represent (vectorize text) and classify (linear model on the vector)",
-        "Search, then rank"
-      ],
-      "correct": 2,
-      "explanation": "Classical sentiment is feature extraction followed by a linear classifier."
-    },
-    {
       "stage": "check",
       "question": "Why does Naive Bayes work despite its 'naive' independence assumption?",
       "options": [
@@ -85,18 +73,6 @@
       ],
       "correct": 3,
       "explanation": "Sarcasm, aspect-based, and cross-lingual sentiment exceed classical BoW models' reach."
-    },
-    {
-      "stage": "post",
-      "question": "Why is L2 regularization important for logistic regression on text?",
-      "options": [
-        "Required to compute gradients",
-        "Avoids ReLU dead units",
-        "Speeds up matrix inversion",
-        "Sparse high-dimensional text features otherwise let the model memorize training examples"
-      ],
-      "correct": 3,
-      "explanation": "L2 prevents overfitting in the sparse-feature, high-dimensional regime of text."
     }
   ]
 }
