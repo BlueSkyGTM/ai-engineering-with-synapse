@@ -15,7 +15,7 @@
       "explanation": "Each pass catches what the other misses. Lexical covers shared vocabulary; the graph covers ancestor and descendant papers regardless of vocabulary."
     },
     {
-      "stage": "pre",
+      "stage": "check",
       "question": "Why is the citation graph traversal capped at two hops?",
       "options": [
         "Because beyond two hops the result set tends to drift off topic and overwhelm downstream ranking",
@@ -51,7 +51,7 @@
       "explanation": "Paper id is the stable handle. Title and author are duplicated across versions, year alone is ambiguous."
     },
     {
-      "stage": "check",
+      "stage": "post",
       "question": "What does graph_score return for a paper that is two hops from the seed set?",
       "options": [
         "Zero",
@@ -63,7 +63,7 @@
       "explanation": "The default graph score schedule is 1.0 at zero hops, 0.6 at one hop, 0.3 at two hops, and zero beyond that."
     },
     {
-      "stage": "check",
+      "stage": "post",
       "question": "Why is the corpus loaded once into a RetrievalClient instead of refetched per query?",
       "options": [
         "Because the mock APIs are slow on every call",
