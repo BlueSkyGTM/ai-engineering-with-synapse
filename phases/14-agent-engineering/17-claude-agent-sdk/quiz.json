@@ -15,18 +15,6 @@
       "explanation": "Client SDK gives you the loop; Agent SDK ships the loop pre-built."
     },
     {
-      "stage": "pre",
-      "question": "What are the two documented purposes of subagents?",
-      "options": [
-        "Parallelization and context isolation",
-        "Caching and rate limiting",
-        "Logging and metrics",
-        "Authn and authz"
-      ],
-      "correct": 0,
-      "explanation": "Subagents run independent work concurrently and preserve the orchestrator's context budget by isolating context."
-    },
-    {
       "stage": "check",
       "question": "Which method is NOT part of the session store surface?",
       "options": [
