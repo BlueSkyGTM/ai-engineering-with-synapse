@@ -13,7 +13,7 @@
       "explanation": "A function is convex if for any two points x, y and any t in [0,1]: f(tx + (1-t)y) <= t*f(x) + (1-t)*f(y). Geometrically, the chord between any two points on the graph never dips below the graph itself."
     },
     {
-      "stage": "pre",
+      "stage": "check",
       "question": "Which of these ML problems has a convex loss landscape?",
       "options": [
         "Training a 3-layer neural network with ReLU activations",
@@ -25,7 +25,7 @@
       "explanation": "Logistic regression has a convex loss (log-loss is convex in the weights). Neural networks, k-means, and matrix factorization are all non-convex. For convex problems, any local minimum is the global minimum."
     },
     {
-      "stage": "post",
+      "stage": "check",
       "question": "Newton's method converges to the minimum of f(x) = 5x^2 + 3x + 1 in how many steps?",
       "options": [
         "1 step (it is exact for quadratic functions)",
@@ -35,6 +35,18 @@
       ],
       "correct": 0,
       "explanation": "Newton's method fits a local quadratic approximation and jumps to its minimum. For an actual quadratic function, the approximation is exact, so Newton's method converges in a single step regardless of the starting point."
+    },
+    {
+      "stage": "check",
+      "question": "Which of the following best describes: Test whether a function is convex using the definition, second...?",
+      "options": [
+        "Newton's method and compare its quadratic convergence against gradient descent",
+        "Test whether a function is convex using the definition, second derivative, and Hessian...",
+        "Solve constrained optimization problems using Lagrange multipliers and interpret",
+        "why neural network loss landscapes are non-convex yet SGD still finds good solut"
+      ],
+      "correct": 1,
+      "explanation": "Test whether a function is convex using the definition, second derivative, and Hessian criteria"
     },
     {
       "stage": "post",
