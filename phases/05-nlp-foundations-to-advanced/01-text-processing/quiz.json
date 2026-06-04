@@ -15,18 +15,6 @@
       "explanation": "Models operate on integer token IDs; preprocessing bridges continuous language to discrete inputs."
     },
     {
-      "stage": "pre",
-      "question": "Which preprocessing operation is rule-based suffix stripping?",
-      "options": [
-        "Stemming",
-        "POS tagging",
-        "Lemmatization",
-        "Tokenization"
-      ],
-      "correct": 0,
-      "explanation": "Stemming chops suffixes with rules; it is fast but can be wrong."
-    },
-    {
       "stage": "check",
       "question": "What does the Porter stemmer step 1a return for the word 'ponies'?",
       "options": [
@@ -85,18 +73,6 @@
       ],
       "correct": 1,
       "explanation": "Transformer models ship a paired tokenizer; classical preprocessing is bypassed."
-    },
-    {
-      "stage": "post",
-      "question": "Why pin NLTK and spaCy versions in requirements?",
-      "options": [
-        "License compatibility",
-        "Tokenizer and lemmatizer behavior shifts between minor releases, silently changing training distribution",
-        "Older versions support more languages",
-        "Newer versions are slower"
-      ],
-      "correct": 1,
-      "explanation": "Library upgrades can change tokenization output, drifting from the training distribution."
     }
   ]
 }
