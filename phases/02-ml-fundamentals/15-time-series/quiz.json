@@ -14,7 +14,7 @@
   },
   {
     "id": "timeseries-pre-2",
-    "stage": "pre",
+    "stage": "check",
     "question": "What does it mean for a time series to be stationary?",
     "options": [
       "The values never change over time",
@@ -27,7 +27,7 @@
   },
   {
     "id": "timeseries-post-1",
-    "stage": "post",
+    "stage": "check",
     "question": "What is the purpose of differencing a time series?",
     "options": [
       "To increase the number of data points",
@@ -37,6 +37,18 @@
     ],
     "correct": 1,
     "explanation": "Differencing replaces each value with the change from the previous value: diff[t] = value[t] - value[t-1]. This removes trend, making the series closer to stationary."
+  },
+  {
+    "stage": "check",
+    "question": "Which of the following best describes: lag features and rolling statistics to convert a time series into...?",
+    "options": [
+      "Decompose a time series into trend, seasonality, and residual components and tes",
+      "a walk-forward validation framework that prevents future data from leaking into ",
+      "Implement lag features and rolling statistics to convert a time series into a...",
+      "why random train/test splits are invalid for time series and demonstrate the per"
+    ],
+    "correct": 2,
+    "explanation": "Implement lag features and rolling statistics to convert a time series into a supervised learning problem"
   },
   {
     "id": "timeseries-post-2",
