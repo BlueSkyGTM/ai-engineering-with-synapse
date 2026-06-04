@@ -15,18 +15,6 @@
       "explanation": "ReAct re-includes prior thoughts and observations on each step, making total prompt length grow with the square of the depth."
     },
     {
-      "stage": "pre",
-      "question": "What is the three-role split that defines ReWOO?",
-      "options": [
-        "Reader, Writer, Reviewer",
-        "Planner, Workers, Solver",
-        "Actor, Evaluator, Reflector",
-        "Generator, Critic, Optimizer"
-      ],
-      "correct": 1,
-      "explanation": "ReWOO separates a Planner that emits a DAG, Workers that fetch evidence, and a Solver that composes the final answer."
-    },
-    {
       "stage": "check",
       "question": "What headline numbers does the paper report for ReWOO vs ReAct on HotpotQA?",
       "options": [
