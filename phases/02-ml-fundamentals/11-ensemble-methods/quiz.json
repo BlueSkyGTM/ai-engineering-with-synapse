@@ -14,7 +14,7 @@
   },
   {
     "id": "ensemble-pre-2",
-    "stage": "pre",
+    "stage": "check",
     "question": "What is the main difference between bagging and boosting?",
     "options": [
       "Bagging trains models in parallel on random subsets; boosting trains models sequentially, focusing on previous errors",
@@ -27,7 +27,7 @@
   },
   {
     "id": "ensemble-post-1",
-    "stage": "post",
+    "stage": "check",
     "question": "In AdaBoost, what happens to the sample weight of a misclassified training point after each round?",
     "options": [
       "It stays the same",
@@ -37,6 +37,18 @@
     ],
     "correct": 1,
     "explanation": "AdaBoost increases the weights of misclassified samples after each round. This forces the next weak learner to pay more attention to the examples the ensemble currently gets wrong."
+  },
+  {
+    "stage": "check",
+    "question": "Which of the following best describes: bagging, boosting, and stacking in terms of what error component...?",
+    "options": [
+      "Compare bagging, boosting, and stacking in terms of what error component each method...",
+      "AdaBoost and gradient boosting from scratch and explain how boosting sequentiall",
+      "a bagging ensemble and demonstrate how averaging decorrelated models reduces var",
+      "ensemble diversity and explain why majority voting accuracy improves with more i"
+    ],
+    "correct": 0,
+    "explanation": "Compare bagging, boosting, and stacking in terms of what error component each method targets"
   },
   {
     "id": "ensemble-post-2",
