@@ -15,18 +15,6 @@
       "explanation": "A state machine puts the legality rules in one transition function. The same input sequence reproduces the same state, which is what makes session replay possible."
     },
     {
-      "stage": "pre",
-      "question": "What does a pull point in the loop represent?",
-      "options": [
-        "A point where the loop yields control and waits for the caller to provide an input",
-        "A model call that returns a tool name",
-        "A timer that fires every N seconds",
-        "A hook subscriber that mutates payload"
-      ],
-      "correct": 0,
-      "explanation": "Pull points are returns, not exceptions. The caller fetches what the harness asked for and calls resume()."
-    },
-    {
       "stage": "check",
       "question": "Which state is the only legal pull point for a tool call?",
       "options": [
