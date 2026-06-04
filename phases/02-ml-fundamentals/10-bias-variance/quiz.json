@@ -14,7 +14,7 @@
   },
   {
     "id": "biasvar-pre-2",
-    "stage": "pre",
+    "stage": "check",
     "question": "The bias-variance decomposition of expected error has three terms. Which one cannot be reduced by any model?",
     "options": [
       "Bias squared",
@@ -27,7 +27,7 @@
   },
   {
     "id": "biasvar-post-1",
-    "stage": "post",
+    "stage": "check",
     "question": "Adding L2 regularization to a model increases bias and decreases variance. Why is this useful?",
     "options": [
       "It always improves both training and test accuracy",
@@ -37,6 +37,18 @@
     ],
     "correct": 1,
     "explanation": "Regularization trades a small increase in bias for a larger decrease in variance. When a model is overfitting (high variance), this tradeoff reduces total error even though bias goes up slightly."
+  },
+  {
+    "stage": "check",
+    "question": "Which of the following best describes: Diagnose whether a model suffers from high bias or high variance...?",
+    "options": [
+      "Derive the bias-variance decomposition of expected prediction error and explain ",
+      "how regularization techniques (L1, L2, dropout, early stopping) trade bias for v",
+      "Diagnose whether a model suffers from high bias or high variance using training and...",
+      "experiments that visualize the bias-variance tradeoff across models of increasin"
+    ],
+    "correct": 2,
+    "explanation": "Diagnose whether a model suffers from high bias or high variance using training and test error patterns"
   },
   {
     "id": "biasvar-post-2",
