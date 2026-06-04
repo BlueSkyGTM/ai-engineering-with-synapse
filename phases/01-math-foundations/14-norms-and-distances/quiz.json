@@ -13,7 +13,7 @@
       "explanation": "Cosine similarity measures the cosine of the angle between two vectors, normalized by their magnitudes. It ranges from -1 (opposite) to +1 (same direction) and ignores vector length, which is why it dominates in NLP where document length is noise."
     },
     {
-      "stage": "pre",
+      "stage": "check",
       "question": "Why is L1 distance called 'Manhattan distance'?",
       "options": [
         "It was invented in Manhattan",
@@ -25,7 +25,7 @@
       "explanation": "L1 distance sums the absolute differences along each axis, which corresponds to the shortest path on a grid where you can only move along axes (no diagonals) — like walking on a city street grid."
     },
     {
-      "stage": "post",
+      "stage": "check",
       "question": "Why does L1 regularization (Lasso) produce sparse weights while L2 regularization (Ridge) does not?",
       "options": [
         "L1 uses a larger penalty constant than L2",
@@ -35,6 +35,18 @@
       ],
       "correct": 1,
       "explanation": "The L1 constraint region is a diamond shape with corners aligned with the axes. The loss function's contour ellipses are most likely to first touch the diamond at a corner, where one or more weights are exactly zero. The L2 constraint is a circle with no corners, so the touch point has all weights nonzero."
+    },
+    {
+      "stage": "check",
+      "question": "Which of the following best describes: L1, L2, cosine, Mahalanobis, Jaccard, and edit distance functions...?",
+      "options": [
+        "Select the appropriate distance metric for a given ML task and explain why alter",
+        "Implement L1, L2, cosine, Mahalanobis, Jaccard, and edit distance functions from scratch",
+        "Connect L1 and L2 norms to LASSO and Ridge regularization and their geometric co",
+        "Demonstrate how the same dataset produces different nearest neighbors under diff"
+      ],
+      "correct": 1,
+      "explanation": "Implement L1, L2, cosine, Mahalanobis, Jaccard, and edit distance functions from scratch"
     },
     {
       "stage": "post",
