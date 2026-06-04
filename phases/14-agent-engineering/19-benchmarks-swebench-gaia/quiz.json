@@ -15,18 +15,6 @@
       "explanation": "The harness gates on test transitions: bug-revealing tests must flip while regression tests must stay green."
     },
     {
-      "stage": "pre",
-      "question": "Why does SWE-bench Verified exist?",
-      "options": [
-        "It runs faster",
-        "OpenAI's 500-task human-curated subset removes ambiguous issues and unreliable tests",
-        "It includes more languages",
-        "It uses a different patch format"
-      ],
-      "correct": 1,
-      "explanation": "Verified is the cleaner subset for credible reporting."
-    },
-    {
       "stage": "check",
       "question": "What did SWE-bench+ find about successful patches?",
       "options": [
