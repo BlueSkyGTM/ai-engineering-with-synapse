@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "What is the knowledge graph the agent walks during root cause analysis?",
-      "options": [
-        "Nodes are K8s objects plus telemetry sources; edges encode ownership, scheduling, and observation",
-        "A flat list of recently restarted pods",
-        "Prometheus metric names organized by team",
-        "A graph of GitHub commits and PR reviews"
-      ],
-      "correct": 0,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "How are root-cause hypotheses ranked for the Slack brief?",
       "options": [
