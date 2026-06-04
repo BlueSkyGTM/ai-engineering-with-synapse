@@ -58,7 +58,7 @@
 .home-hero { padding: var(--s7) 0 var(--s5); border-bottom: 1px solid var(--line); margin-bottom: var(--s5); }
 .home-hero__t { font-family: var(--pix); font-size: clamp(2.8rem, 7.5vw, 5rem); line-height: 1.02; text-transform: uppercase; color: var(--cream); margin: var(--s3) 0 var(--s5); }
 .home-hero__sub { max-width: 60ch; font-size: 0.92rem; line-height: 1.6; color: var(--cream); text-wrap: pretty; }
-.home-hero__by { max-width: 60ch; font-size: 0.82rem; line-height: 1.5; color: var(--muted); margin-top: var(--s4); }
+.home-hero__by { max-width: 60ch; font-size: 0.82rem; line-height: 1.5; color: var(--cream-dim); margin-top: var(--s4); }
 .home-hero__t-punch { color: var(--terra); }
 
 .home-hero__cta { display: flex; gap: var(--s3); margin-top: var(--s5); flex-wrap: wrap; }
@@ -72,9 +72,9 @@
 .home-hero__cta-primary:focus-visible { outline: 2px solid var(--terra); outline-offset: 2px; }
 .home-hero__cta-secondary {
   font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--cream-dim); padding: var(--s2) var(--s4);
+  color: var(--cream); padding: var(--s2) var(--s4);
   min-height: 44px; display: inline-flex; align-items: center;
-  border: 1px solid var(--line); text-decoration: none; transition: border-color 0.1s, color 0.1s;
+  border: 1px solid rgba(233,225,210,0.4); text-decoration: none; transition: border-color 0.1s, color 0.1s;
 }
 .home-hero__cta-secondary:hover { border-color: var(--terra); color: var(--cream); }
 .home-hero__cta-secondary:focus-visible { outline: 2px solid var(--terra); outline-offset: 2px; }
@@ -414,12 +414,9 @@
 .flaws__eyebrow { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terra); margin-bottom: var(--s4); }
 .flaws__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--s4); }
 .flaw { padding: var(--s4); border-left: 2px solid var(--line); }
-.flaw__n { font-family: var(--pix); font-size: 1.8rem; color: var(--terra); line-height: 1; margin-bottom: var(--s2); opacity: 0.5; }
+.flaw__n { font-family: var(--pix); font-size: 1.8rem; color: var(--terra); line-height: 1; margin-bottom: var(--s2); }
 .flaw__title { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream); margin-bottom: var(--s2); }
-.flaw__body { font-size: 0.82rem; color: var(--cream-dim); line-height: 1.65; }
-.flaw--lead { grid-column: 1 / -1; border-left-color: var(--terra); background: rgba(217,119,87,0.04); padding: var(--s5); }
-.flaw--lead .flaw__n { opacity: 1; }
-.flaw--lead .flaw__body { color: var(--cream); max-width: 640px; }
+.flaw__body { font-size: 0.82rem; color: var(--cream); line-height: 1.65; }
 @media (max-width: 720px) { .flaws__grid { grid-template-columns: 1fr; } }
 
 /* ---------- Fleet Engine context block (data-bar, no card/border) ---------- */
