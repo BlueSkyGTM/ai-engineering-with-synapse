@@ -14,29 +14,41 @@
   },
   {
     "id": "nb-pre-2",
-    "stage": "pre",
+    "stage": "check",
     "question": "What does Laplace smoothing prevent in Naive Bayes?",
     "options": [
       "Overfitting to large datasets",
-      "Zero probabilities for words never seen in a class during training",
       "Slow training on high-dimensional data",
+      "Zero probabilities for words never seen in a class during training",
       "Class imbalance in the dataset"
     ],
-    "correct": 1,
+    "correct": 2,
     "explanation": "Without smoothing, a word that never appeared in 'spam' training emails would get P(word|spam) = 0, making the entire product zero regardless of other strong evidence. Laplace smoothing adds 1 to each count."
   },
   {
     "id": "nb-post-1",
-    "stage": "post",
+    "stage": "check",
     "question": "The naive independence assumption is clearly wrong for text. Why does Naive Bayes still classify well?",
     "options": [
-      "It only works on very small vocabularies where independence holds",
       "Classification only needs correct class rankings, not correct probability estimates, and the assumption introduces stable errors that affect all classes similarly",
+      "It only works on very small vocabularies where independence holds",
       "Modern implementations secretly remove the independence assumption",
       "It only works when features are truly independent"
     ],
-    "correct": 1,
+    "correct": 0,
     "explanation": "NB needs to rank classes correctly, not estimate exact probabilities. The independence assumption is high bias but low variance, making it stable with limited data. Correlated features double-count evidence for the correct class too."
+  },
+  {
+    "stage": "check",
+    "question": "Which of the following best describes: Multinomial Naive Bayes from scratch with Laplace smoothing for...?",
+    "options": [
+      "why the naive independence assumption is mathematically wrong but produces corre",
+      "Multinomial, Bernoulli, and Gaussian Naive Bayes variants and select the right o",
+      "Naive Bayes against logistic regression on high-dimensional sparse data and expl",
+      "Implement Multinomial Naive Bayes from scratch with Laplace smoothing for text..."
+    ],
+    "correct": 3,
+    "explanation": "Implement Multinomial Naive Bayes from scratch with Laplace smoothing for text classification"
   },
   {
     "id": "nb-post-2",
@@ -57,11 +69,11 @@
     "question": "An email contains 'free' twice and 'money' once. In Multinomial NB with log probabilities, how is the spam score computed?",
     "options": [
       "log P(spam) + log P(free|spam) + log P(money|spam)",
-      "log P(spam) + 2 * log P(free|spam) + 1 * log P(money|spam)",
       "P(spam) * P(free|spam) * P(money|spam)",
+      "log P(spam) + 2 * log P(free|spam) + 1 * log P(money|spam)",
       "log P(spam) * 2 * log P(free|spam)"
     ],
-    "correct": 1,
+    "correct": 2,
     "explanation": "Multinomial NB multiplies the word likelihoods raised to their count. In log space: log P(spam) + 2*log P(free|spam) + 1*log P(money|spam). The word count acts as an exponent."
   }
 ]
