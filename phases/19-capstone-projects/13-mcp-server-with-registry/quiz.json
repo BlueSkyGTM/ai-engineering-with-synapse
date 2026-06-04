@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "Which authorization model gates tool calls in this capstone?",
-      "options": [
-        "OAuth 2.1 tokens carrying per-tool scopes, checked at tool-call time",
-        "A shared admin password",
-        "API keys per IP address",
-        "Mutual TLS without scopes"
-      ],
-      "correct": 0,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "What is the role of the .well-known/mcp-capabilities document?",
       "options": [
