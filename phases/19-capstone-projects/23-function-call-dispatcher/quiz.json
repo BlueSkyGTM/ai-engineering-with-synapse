@@ -15,18 +15,6 @@
       "explanation": "Retrying a db.write that timed out at 4.9s can produce a second write. The dispatcher refuses unless the handler tells it the call is safe to repeat."
     },
     {
-      "stage": "pre",
-      "question": "What is the idempotency-key dedupe protecting against?",
-      "options": [
-        "Slow networks",
-        "A retry that fires while the original call is still in flight",
-        "Schema validation errors",
-        "Process restarts"
-      ],
-      "correct": 1,
-      "explanation": "Without dedupe, a retry at 5s races a slow original still pending. The cache collapses both into one handler invocation."
-    },
-    {
       "stage": "check",
       "question": "Which error kinds are eligible for retry in this dispatcher?",
       "options": [
