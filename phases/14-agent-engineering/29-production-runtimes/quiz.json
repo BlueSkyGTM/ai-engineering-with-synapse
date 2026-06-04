@@ -15,18 +15,6 @@
       "explanation": "These are the six runtime shapes; pick a shape before picking a framework."
     },
     {
-      "stage": "pre",
-      "question": "When is request-response a poor fit?",
-      "options": [
-        "On a 1-second classification",
-        "When the task takes longer than about 30 seconds and users hang up while workers pile up",
-        "On REST APIs",
-        "On internal services"
-      ],
-      "correct": 1,
-      "explanation": "Synchronous HTTP is only viable for short tasks; long tasks need queue/durable/event shapes."
-    },
-    {
       "stage": "check",
       "question": "What is durable execution's core property?",
       "options": [
