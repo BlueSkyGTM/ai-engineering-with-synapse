@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "Why separate ClickHouse and Postgres in the storage tier?",
-      "options": [
-        "They are interchangeable and one is chosen at random",
-        "Postgres is faster for span ingest",
-        "ClickHouse cannot store strings",
-        "ClickHouse handles columnar analytics over spans while Postgres holds users, sessions, and app metadata"
-      ],
-      "correct": 3,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "What does the tail-sampling processor in the OpenTelemetry Collector do?",
       "options": [
