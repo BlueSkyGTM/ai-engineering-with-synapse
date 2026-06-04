@@ -54,3 +54,4 @@ graphify-out/
 
 # Cloned reference repos (local only)
 *-ref/
+.gstack/

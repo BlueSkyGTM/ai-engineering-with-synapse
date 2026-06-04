@@ -32,9 +32,10 @@ everything that requires judgment — site changes, deployment, new content.
 | Workspace | Directory | Role |
 |-----------|-----------|------|
 | **AI School** | `ai-school-curriculum/` | Curriculum + portfolio site (`site-new/`) |
-| **Expansion** | `ai-school-expansion/` | Made With ML source — future content absorption |
 | **Anti-library** | `ai-school-anti-library/` | Free books source (EbookFoundation) |
 | **Workspace Builder** | `workspace-builder/` | Automated setup — read only |
+
+`ai-school-expansion/` (Made With ML) is retired — content added to `site-new/js/library-data.js`. Delete the directory when convenient.
 
 `ai-school-website/` was deleted. All site work is in `ai-school-curriculum/site-new/`.
 
