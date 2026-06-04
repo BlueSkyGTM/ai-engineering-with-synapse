@@ -15,18 +15,6 @@
       "explanation": "BIO turns span extraction into token classification with B/I/O prefixes."
     },
     {
-      "stage": "pre",
-      "question": "Why are rule-based gazetteers brittle in production NER?",
-      "options": [
-        "They require GPUs",
-        "They are slow",
-        "They have zero coverage on new entities and cannot disambiguate (e.g. Apple fruit vs company)",
-        "They cannot handle multi-token entities"
-      ],
-      "correct": 2,
-      "explanation": "Gazetteers can match known strings but cannot disambiguate sense or generalize to unseen names."
-    },
-    {
       "stage": "check",
       "question": "What is the key advantage of a CRF over an HMM for NER?",
       "options": [
@@ -85,18 +73,6 @@
       ],
       "correct": 1,
       "explanation": "BIO assigns one label per token; nested spans need multi-pass or span-based models."
-    },
-    {
-      "stage": "post",
-      "question": "When does classical NER (CRF or BiLSTM-CRF) still beat an LLM in 2026?",
-      "options": [
-        "On nested entities",
-        "Whenever the input is in English",
-        "On open-domain narrative",
-        "Under tight latency budgets, abundant labels, stable ontologies, or non-generative regulatory constraints"
-      ],
-      "correct": 3,
-      "explanation": "Classical NER wins on latency, labeled-data regimes, fixed ontologies, and on-prem constraints."
     }
   ]
 }
