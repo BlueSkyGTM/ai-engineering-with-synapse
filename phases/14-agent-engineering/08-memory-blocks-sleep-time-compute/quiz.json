@@ -15,18 +15,6 @@
       "explanation": "Letta uses core (always visible), recall (conversation history), and archival (external) tiers."
     },
     {
-      "stage": "pre",
-      "question": "Which production problem does sleep-time compute target?",
-      "options": [
-        "Tail latency from doing memory consolidation on the critical path",
-        "Higher accuracy on math problems",
-        "Lower embedding cost",
-        "Faster JSON parsing"
-      ],
-      "correct": 0,
-      "explanation": "Sleep-time moves prune/summarize/reconcile off the user-facing path, so primary responses stay fast."
-    },
-    {
       "stage": "check",
       "question": "Which property is NOT a memory block field in Letta?",
       "options": [
