@@ -15,18 +15,6 @@
       "explanation": "Attention lets the decoder consult every encoder state, not just the last one."
     },
     {
-      "stage": "pre",
-      "question": "What is the attention context vector at decoder step t?",
-      "options": [
-        "The decoder's input embedding",
-        "A weighted average of encoder hidden states where the weights come from a query-key score",
-        "The encoder's final hidden state",
-        "A random projection"
-      ],
-      "correct": 1,
-      "explanation": "Context = sum of alpha_i * h_i, a step-dependent weighted average of encoder states."
-    },
-    {
       "stage": "check",
       "question": "In Bahdanau (additive) attention, what role does the vector v_a play?",
       "options": [
@@ -85,18 +73,6 @@
       ],
       "correct": 3,
       "explanation": "Self-attention queries the same sequence, with split K and V projections, parallelized across heads."
-    },
-    {
-      "stage": "post",
-      "question": "What is one practical use case for masking in attention?",
-      "options": [
-        "Replacing dropout",
-        "Setting attention weight for padding tokens to zero so they do not contribute to the context vector",
-        "Encoding positions",
-        "Reducing model size"
-      ],
-      "correct": 1,
-      "explanation": "Masking padding (or future tokens in a decoder) prevents the softmax from spreading weight onto invalid positions."
     }
   ]
 }
