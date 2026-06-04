@@ -13,7 +13,7 @@
       "explanation": "In the column picture, Ax = b asks: what linear combination of A's columns produces b? If b is not in the column space (span of A's columns), no exact solution exists. This happens when the system is overdetermined (more equations than unknowns)."
     },
     {
-      "stage": "pre",
+      "stage": "check",
       "question": "Why is partial pivoting used in Gaussian elimination?",
       "options": [
         "It reduces the time complexity from O(n^3) to O(n^2)",
@@ -25,7 +25,7 @@
       "explanation": "Without pivoting, dividing by a small pivot amplifies rounding errors. Partial pivoting swaps rows to place the largest absolute value in the pivot position, keeping the multipliers small and the computation numerically stable."
     },
     {
-      "stage": "post",
+      "stage": "check",
       "question": "Why is Cholesky decomposition preferred over LU for solving (X^T X + lambda I) w = X^T y in ridge regression?",
       "options": [
         "Cholesky works on any matrix while LU requires square matrices",
@@ -35,6 +35,18 @@
       ],
       "correct": 1,
       "explanation": "When lambda > 0, X^T X + lambda I is always symmetric positive definite. Cholesky factors A = LL^T in O(n^3/3) operations — roughly half the O(2n^3/3) of LU — and needs only the lower triangle. It exploits the symmetry that LU does not."
+    },
+    {
+      "stage": "check",
+      "question": "Which of the following best describes: Factor matrices with LU, QR, and Cholesky decompositions and...?",
+      "options": [
+        "Solve Ax = b using Gaussian elimination with partial pivoting and back substitut",
+        "Derive the normal equations for least squares and connect them to linear and rid",
+        "Factor matrices with LU, QR, and Cholesky decompositions and explain when each is...",
+        "Diagnose ill-conditioned systems using the condition number and apply regulariza"
+      ],
+      "correct": 2,
+      "explanation": "Factor matrices with LU, QR, and Cholesky decompositions and explain when each is appropriate"
     },
     {
       "stage": "post",
