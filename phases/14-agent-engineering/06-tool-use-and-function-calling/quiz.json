@@ -15,18 +15,6 @@
       "explanation": "Toolformer's self-supervised signal keeps annotations whose tool results lower next-token loss."
     },
     {
-      "stage": "pre",
-      "question": "What is the BFCL V4 split that the lesson reports?",
-      "options": [
-        "100% single-turn",
-        "40% agentic, 30% multi-turn, 10% live, 10% non-live, 10% hallucination",
-        "50% live, 50% synthetic",
-        "33% agentic, 33% planning, 33% reflection"
-      ],
-      "correct": 1,
-      "explanation": "BFCL V4 weights are 40 agentic / 30 multi-turn / 10 live / 10 non-live / 10 hallucination."
-    },
-    {
       "stage": "check",
       "question": "Why is a tool's description load-bearing?",
       "options": [
