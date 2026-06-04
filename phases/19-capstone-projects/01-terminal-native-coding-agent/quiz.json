@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "Why does the harness run each task inside an E2B or Daytona sandbox?",
-      "options": [
-        "To isolate filesystem and tool execution from the host so the worktree can be torn down on completion",
-        "To bypass model-provider rate limits",
-        "To benchmark token throughput on cold caches",
-        "To enable GPU access for the agent loop"
-      ],
-      "correct": 0,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "Which built-in hook is the natural place to block destructive shell commands before they execute?",
       "options": [
