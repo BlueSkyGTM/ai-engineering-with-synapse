@@ -10,10 +10,10 @@
         "Relative depth gives only ordered distances without real-world units; metric depth gives distances in metres and requires the model to have learnt absolute scale from training data"
       ],
       "correct": 3,
-      "explanation": "Relative depth preserves ordering and ratios but has no anchor to real-world units \u2014 a MiDaS or Depth Anything prediction needs alignment before you can compare it to a ground-truth measurement in metres. Metric depth models (ZoeDepth, UniDepth, Metric3D) output calibrated distances at the cost of sensitivity to camera intrinsics and training data coverage."
+      "explanation": "Relative depth preserves ordering and ratios but has no anchor to real-world units — a MiDaS or Depth Anything prediction needs alignment before you can compare it to a ground-truth measurement in metres. Metric depth models (ZoeDepth, UniDepth, Metric3D) output calibrated distances at the cost of sensitivity to camera intrinsics and training data coverage."
     },
     {
-      "stage": "pre",
+      "stage": "check",
       "question": "Depth Anything V3 uses a frozen DINOv2 encoder plus a DPT-style decoder. Why freeze the encoder?",
       "options": [
         "DINOv2 would otherwise learn bad features",
@@ -25,16 +25,28 @@
       "explanation": "Self-supervised ViTs like DINOv2 / DINOv3 already have features that transfer to dense tasks with minimal fine-tuning. A frozen encoder plus a lightweight depth decoder means you train a tiny number of parameters on depth data, and you inherit DINOv2's cross-domain generalisation (indoor, outdoor, medical, satellite) for free. Fine-tuning the backbone sometimes hurts if the depth dataset is narrower than DINOv2's pretraining distribution."
     },
     {
-      "stage": "post",
+      "stage": "check",
       "question": "To lift a pixel (u, v) with predicted depth d to 3D, you use X = (u - cx) * d / fx, Y = (v - cy) * d / fy, Z = d. What are fx, fy, cx, cy?",
       "options": [
-        "Pinhole camera intrinsics \u2014 focal lengths and principal point in pixels, from EXIF metadata or camera calibration",
+        "Pinhole camera intrinsics — focal lengths and principal point in pixels, from EXIF metadata or camera calibration",
         "Training loss weights",
         "Normalisation constants",
         "Weights learned by the depth decoder"
       ],
       "correct": 0,
       "explanation": "The pinhole-camera formula needs the camera intrinsics. fx, fy are the focal lengths in pixel units; cx, cy are the principal point (usually near image centre). Without intrinsics you can only assume a generic FOV (~60 degrees) which is enough for visualisation but not for measurement. Many 2026 pipelines estimate intrinsics automatically from image content (Perspective Fields, UniDepth)."
+    },
+    {
+      "stage": "check",
+      "question": "Which of the following best describes: relative and metric depth and state which one each production...?",
+      "options": [
+        "Depth Anything V3 (DINOv2 backbone) to predict depth for arbitrary single images",
+        "Distinguish relative and metric depth and state which one each production model...",
+        "why monocular depth works at all from a single image (perspective cues, texture ",
+        "Lift 2D detections to 3D points using a depth map and pinhole camera intrinsics"
+      ],
+      "correct": 1,
+      "explanation": "Distinguish relative and metric depth and state which one each production model (MiDaS, Marigold, Depth Anything V3, ZoeDepth) solves"
     },
     {
       "stage": "post",
