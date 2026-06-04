@@ -15,18 +15,6 @@
       "explanation": "Agno is Python (FastAPI-shaped); Mastra is TypeScript (Vercel AI SDK-shaped)."
     },
     {
-      "stage": "pre",
-      "question": "What is Agno's recommended production deployment shape?",
-      "options": [
-        "A long-lived stateful daemon",
-        "A stateless session-scoped FastAPI backend; each request starts a fresh agent and session state lives in a DB",
-        "A serverless cron worker only",
-        "A WebSocket-only server"
-      ],
-      "correct": 1,
-      "explanation": "Stateless FastAPI per request; session state externalized to a DB."
-    },
-    {
       "stage": "check",
       "question": "What are Mastra's three primitives?",
       "options": [
