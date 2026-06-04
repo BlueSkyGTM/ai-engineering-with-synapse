@@ -15,18 +15,6 @@
       "explanation": "Claude reads pixels and emits keyboard/mouse actions; no OS accessibility API is used."
     },
     {
-      "stage": "pre",
-      "question": "What is Gemini 2.5 Computer Use's distinguishing safety feature?",
-      "options": [
-        "A per-step safety service that assesses each action before execution and rejects unsafe ones",
-        "Hard-coded WAF rules",
-        "Mandatory CAPTCHAs",
-        "Read-only mode by default"
-      ],
-      "correct": 0,
-      "explanation": "Gemini 2.5 Computer Use ships a per-step safety classifier as a defining feature."
-    },
-    {
       "stage": "check",
       "question": "What does the lesson identify as untrusted input across all three models?",
       "options": [
