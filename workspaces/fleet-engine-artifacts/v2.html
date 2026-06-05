@@ -587,9 +587,8 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 <body>
 
 <nav class="page-nav">
-  <a href="index.html" class="nav-back">← Back</a>
-  <span class="nav-title">Fleet Engine: Cortex · Claude Code Orchestration</span>
-  <a href="https://github.com/BlueSkyGTM/agentic-gtm-mcp" class="nav-link">GitHub →</a>
+  <a href="index.html" class="nav-back">← Portfolio</a>
+  <span class="nav-title">Fleet Engine: Cortex</span>
 </nav>
 
 <!-- ══ HERO ══ -->
@@ -605,8 +604,8 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
       Six environmental failures. Zero prompt failures. V2 eliminates every hostile layer — no Docker, no Postgres, no n8n. Vertex AI runs the agents. GCS handles the handoff. <span class="em">The same three agent prompts run cloud-native, with RAG shared memory that compounds across every run.</span>
     </p>
     <div class="hero-btns reveal">
-      <a href="#architecture" class="btn-a">See the rewrite ↓</a>
-      <a href="v1.html" class="btn-b">V1 Archive →</a>
+      <a href="#languages" class="btn-a">See the build ↓</a>
+      <a href="https://github.com/BlueSkyGTM/fleet-engine-cortex" class="btn-b">GitHub →</a>
     </div>
   </div>
 </section>
@@ -1079,7 +1078,9 @@ const failures = [
     });
   });
 
+  currentId = '01';
   renderList();
+  renderDetail('01');
 })();
 
 // ── §03 Orchestration terminal ────────────────────────────
