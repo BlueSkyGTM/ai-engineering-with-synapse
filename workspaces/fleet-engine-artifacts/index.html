@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fleet Engine — Three Versions. One Problem.</title>
+<title>Fleet Engine — AI GTM Enrichment Pipeline</title>
 <meta property="og:type" content="website">
-<meta property="og:title" content="Fleet Engine — Three Versions. One Problem.">
-<meta property="og:description" content="A three-agent GTM pipeline. V1 documented. V2 rebuilding. V3 locked.">
+<meta property="og:title" content="Fleet Engine — AI GTM Enrichment Pipeline">
+<meta property="og:description" content="Three-agent AI pipeline that finds companies showing hiring signals, researches what's broken inside each one, and writes a tailored first message. Built across two versions.">
 <meta property="og:url" content="https://portfolio.blueskygtm.engineer/">
 <meta name="twitter:card" content="summary">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
@@ -121,11 +121,11 @@ h1 em { font-style: normal; color: var(--orange); }
 /* ── panel base ── */
 .panel {
   display: flex; flex-direction: column;
-  border: 1px solid var(--border2);
+  border: 2px solid rgba(255,255,255,0.10);
   background: var(--surface);
   position: relative; overflow: hidden;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
   text-decoration: none; color: inherit;
 }
 
@@ -273,6 +273,53 @@ footer span { font-size: 10px; color: var(--muted); letter-spacing: 0.04em; }
 footer a { font-size: 10px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
 footer a:hover { color: var(--orange); }
 
+/* ── MMBN: Panel area backgrounds ───────────────────────── */
+.panel-v1 {
+  background-color: #050A03;
+  background-image: radial-gradient(rgba(185,227,106,0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+  border-color: rgba(185,227,106,0.25);
+}
+.panel-v1:hover { border-color: rgba(185,227,106,0.55) !important; }
+
+.panel-v2 {
+  background-color: #03070F;
+  background-image: radial-gradient(rgba(118,161,255,0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+  border-color: rgba(118,161,255,0.22);
+}
+.panel-v2:hover { border-color: rgba(118,161,255,0.55) !important; }
+
+.panel-v3 {
+  background-color: #08041A;
+  background-image: repeating-linear-gradient(0deg, rgba(155,109,255,0.025) 0px, rgba(155,109,255,0.025) 1px, transparent 1px, transparent 28px);
+  border-color: rgba(155,109,255,0.18);
+}
+
+/* ── MMBN: HP bar in crew items ──────────────────────────── */
+.crew-item {
+  position: relative;
+}
+.crew-item::before {
+  content: '';
+  position: absolute; left: 0; top: 0;
+  width: 3px; height: 100%;
+  opacity: 0.4;
+}
+.crew-item:nth-child(1)::before { background: var(--accent); }
+.crew-item:nth-child(2)::before { background: var(--action); }
+.crew-item:nth-child(3)::before { background: var(--purple); }
+
+/* ── MMBN: panels-wrap background ───────────────────────── */
+.panels-wrap {
+  background-color: #06060A;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 48px 48px;
+  padding-bottom: 56px;
+}
+
 /* ── responsive ── */
 @media (max-width: 1000px) {
   header { grid-template-columns: 1fr; gap: 32px; }
@@ -288,8 +335,8 @@ footer a:hover { color: var(--orange); }
   <header>
     <div class="header-left">
       <div class="eyebrow">AI GTM Enrichment Pipeline</div>
-      <h1>Three versions.<br>One problem.<br><em>Not finished.</em></h1>
-      <p class="deck">Fleet Engine is an AI system that finds companies that are likely to need your service, researches exactly what's broken inside each one, identifies a real person to talk to, and writes a first message tailored to their specific situation — not a template, not a blast, one message per company grounded in evidence. It reads public job postings as the signal: a company hiring for RevOps, or bringing in a financial controller, or scaling a growth team is showing you exactly what problem they're paying to solve right now. Fleet Engine reads that signal, enriches it, and turns it into a warm outreach in minutes. This is the engineering record of building it across three versions until the infrastructure stopped failing.</p>
+      <h1>Three agents.<br>Two versions.<br><em>One clean rebuild.</em></h1>
+      <p class="deck">Fleet Engine reads job postings as sales signals — a company hiring for RevOps is showing you the problem they're paying to solve. Three AI agents find those companies, research what's broken inside each one, identify a real contact, and write a tailored first message grounded in evidence. This is the engineering record of building it across two shipped versions.</p>
       <div class="select-hint">Select a version to enter</div>
     </div>
     <div class="header-right">
