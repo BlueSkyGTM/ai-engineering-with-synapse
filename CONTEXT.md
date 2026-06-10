@@ -8,7 +8,7 @@ Build the Full-Stack GTM course pipeline from archaeology through validation.
 |-----------|-------|-------------|
 | Archaeology | `stages/00-a-curriculum-archaeology/CONTEXT.md` | Map existing site and codebase |
 | GTM research | `stages/00-b-gtm-content-mapping/CONTEXT.md` | Map GTM concepts to phases via Perplexity |
-| Agent setup | `stages/00-c-agent-setup/CONTEXT.md` | Install and tailor operator-kit agents |
+| Agent setup | `stages/00-c-agent-setup/CONTEXT.md` | Write agent briefs (Lyra, Newton, Echo, Hypatia) from 00-a/00-b outputs |
 | Helix design | `stages/00-d-helix-design/CONTEXT.md` | FSRS spec, flag format, persona system |
 | Shared context | `stages/00-e-seed/CONTEXT.md` | Bootstrap variable registry and course identity |
 | Content generation | `stages/01-gtm-skeleton/CONTEXT.md` | GTM lesson outlines |
@@ -30,4 +30,4 @@ Build the Full-Stack GTM course pipeline from archaeology through validation.
 | Vault | `vault/` | Course identity, variable registry, Helix voice, student archetype |
 | Shared refs | `shared/` | Cross-stage files: lesson format spec, exercise format spec |
 | gstack | `skills/gstack/` | /spec, /review, /ship, /design-review, /office-hours, /canary |
-| Operator-kit | `skills/operator-kit/` | Lyra, Newton, Echo, Hypatia agent definitions |
+| Agent briefs | `stages/00-c-agent-setup/output/agent-briefs/` | Lyra, Newton, Echo, Hypatia — written by 00-c |

@@ -10,13 +10,11 @@ Install operator-kit agents, write tailoring briefs, configure context loader.
 | Workflow map | `../../CLAUDE.md` | Routing table | Scope of what each agent will do |
 | Format specs | `../00-a-curriculum-archaeology/output/` | All three specs | Scope for Lyra content brief |
 | GTM topic map | `../00-b-gtm-content-mapping/output/gtm-topic-map.md` | Full file | Scope for Newton brief |
-| Operator-kit | `../../skills/operator-kit/` | Agent definitions | Base agents to tailor |
 | Runtime guide | `../../references/runtime-guide.md` | Agent routing section | Declaration format |
 
 ## Process
 
-1. Install operator-kit agents into `../../skills/operator-kit/` if not present
-2. Write Echo brief: read-only scout, BlueSkyGTM repo, 00-a archaeology scope
+1. Write Echo brief: read-only scout, BlueSkyGTM repo, 00-a archaeology scope
 3. Write Newton brief: GTM topic clusters, Perplexity as source, cite every claim, stopping criteria
 4. Write Lyra content brief: lesson format spec path, GTM tone, Full-Stack GTM identity, token budget, chunking strategy for 498-lesson scale
 5. Write Lyra code brief: site architecture constraints, render pipeline (ui.js, catalog.js), auth.js constraints, no breaking changes
