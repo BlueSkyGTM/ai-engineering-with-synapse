@@ -1,0 +1,30 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Authentication files (NEVER commit these)
+application_default_credentials.json
+adc.json
+*.adc
+*gcloud*
+.credential.json
+credential.json
+service-account-key.json
+
+# Google Cloud
+.gcloud/
+gsutil/
+.boto
+
+# Node dependencies
+node_modules/
+
+# Pipeline outputs
+output/*.json
+!output/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+  +++++++ REPLACE
