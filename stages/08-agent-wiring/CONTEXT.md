@@ -1,7 +1,7 @@
 <!-- Agent: Lyra-code -->
 # Stage 08: Agent Wiring
 
-Write CONTEXT.md files at canonical stage paths and update project-keywords.json.
+Verify all stage CONTEXT.md files are correctly wired and extend project-keywords.json. Do NOT author or overwrite existing CONTEXT.md files — they are hand-curated and treated as locked inputs.
 
 ## Inputs
 
@@ -15,17 +15,19 @@ Write CONTEXT.md files at canonical stage paths and update project-keywords.json
 ## Process
 
 1. Verify all Stage 01-07 output folders contain artifacts before proceeding
-2. For each build pipeline stage (01-10), write the stage CONTEXT.md at its canonical path with the correct `<!-- Agent: -->` declaration
-3. Wire each CONTEXT.md to reference the correct prior stage output paths
-4. Update `project-keywords.json` with a keyword entry per stage
-5. Verify end-to-end for one stage: keyword fires, context loads, agent invoked, output lands at correct path
-6. CONTEXT.md files are written to their actual stage folders, not staged in output/
+2. For each build pipeline stage (01-10), READ the existing CONTEXT.md — do not overwrite
+3. Verify each CONTEXT.md has: correct `<!-- Agent: -->` declaration, all input paths pointing to real output locations, no unfilled `{{VARIABLE}}` placeholders
+4. Flag any missing or malformed declarations — report to human before fixing
+5. Update `project-keywords.json` with a keyword entry per stage
+6. Verify end-to-end for one stage: keyword fires, context loads, agent invoked, output lands at correct path
 
 ## Audit
 
 | Check | Pass Condition |
 |-------|---------------|
 | All declarations present | Every build pipeline CONTEXT.md has a valid Agent declaration |
+| No broken input paths | All relative paths in each CONTEXT.md resolve to existing files |
+| No unresolved placeholders | No `{{VARIABLE}}` strings remain in any CONTEXT.md |
 | Keywords complete | Every stage has at least one entry in project-keywords.json |
 | One stage verified | End-to-end test passes for one stage before rest are wired |
 
@@ -33,5 +35,5 @@ Write CONTEXT.md files at canonical stage paths and update project-keywords.json
 
 | Artifact | Location | Format |
 |----------|----------|--------|
-| Stage CONTEXT.md files | Canonical stage paths | Agent declaration + input paths + process brief |
+| Wiring audit report | `output/wiring-audit.md` | Per-stage: declaration status, broken paths, placeholder gaps |
 | `project-keywords.json` | `../00-c-agent-setup/output/` (updated in place) | Stage keyword entries added |

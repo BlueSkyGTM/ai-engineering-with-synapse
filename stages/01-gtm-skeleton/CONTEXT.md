@@ -37,3 +37,4 @@ Generate one GTM lesson outline per mapped phase slot. Outlines only — no full
 | Artifact | Location | Format |
 |----------|----------|--------|
 | `gtm-lesson-outlines.md` | `output/` | One outline block per GTM lesson slot; exercise-only flags where applicable |
+| `manifest.json` | `output/` | 498 lesson slots with status (pending/done/blocked), phase, and lesson ID — consumed by Stage 02 for resumable batch processing |

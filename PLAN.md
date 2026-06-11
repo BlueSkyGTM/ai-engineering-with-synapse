@@ -94,7 +94,7 @@ when those agents ARE configured (Stage 01+). The Phase 0 stages just won't use 
 ## Success Criteria
 Phase 0 is done when:
 1. All 5 output folders have files (not just .gitkeep)
-2. vault/ has no unfilled {{VARIABLE}} placeholders
+2. vault/ and all stage CONTEXT.md files have no unfilled {{VARIABLE}} placeholders — includes {{REPO_URL}}, {{SYNAPSE_REPO_URL}}, {{SITE_URL}}
 3. copy-paste-flag-format.md exists and contains the exact flag string
 4. project-keywords.json covers all 10 build pipeline stages
 5. Stage 01 CONTEXT.md can be opened and run without missing context
