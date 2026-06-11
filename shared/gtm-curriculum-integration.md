@@ -38,7 +38,7 @@ This document records the curriculum restructure decisions for the Full-Stack GT
 | 04 | Data pipelines, ETL basics | Enrichment waterfalls; building multi-source data pipelines | "This is the Clay waterfall — Find → Enrich → Transform → Export" |
 | 05 | LLM prompting, few-shot learning | Outbound copy generation; personalized sequence messaging at scale | "This prompt template writes your first 1,000 cold emails" |
 | 06 | Embeddings, semantic search | Inbound lead routing; matching inbound signals to ICP definitions | "This embedding model routes inbound leads to the right sequence" |
-| 07 | Fine-tuning, RLHF basics | ABM personalization; account-specific message tuning | "Fine-tuning = training your outbound voice on your best deals" |
+| 07 | Fine-tuning, RLHF basics | Training a lead scoring model on closed-won CRM data; adapting model weights to your specific deal signals | "Fine-tuning = training your scoring model on your own deal history. Every closed-won and lost deal is a labeled training example." |
 | 08 | Vector databases, retrieval | CRM as vector store; account memory and context retrieval | "Your CRM is a retrieval system — here's how to query it like one" |
 | 09 | Agents, tool use, function calling | GTM agent design; research → enrich → personalize → send | "This agent loop is your automated SDR pipeline" |
 | 10 | Multi-agent orchestration | Multi-agent GTM systems; Newton + Echo + Lyra working in parallel | "This orchestration pattern is how your GTM agents divide the work" |
@@ -47,7 +47,7 @@ This document records the curriculum restructure decisions for the Full-Stack GT
 | 13 | Deployment, CI/CD | Production GTM infrastructure; shipping and maintaining GTM systems | "This deploy pipeline ships your Clay tables and n8n workflows" |
 | 14 | Cost optimization, latency | GTM stack cost management; optimizing API costs per enrichment run | "Every Clay credit is a token cost — optimize like you would LLM calls" |
 | 15 | Security, auth, compliance | Email compliance, data privacy; CAN-SPAM, GDPR for outbound systems | "Auth for GTM agents = DKIM, SPF, and API key rotation" |
-| 16 | Distributed systems basics | Workflow orchestration at scale; n8n multi-node, Make scenarios | "Distributed = your n8n workflow handling 10,000 leads simultaneously" |
+| 16 | Distributed systems basics | Enrichment waterfall concurrency; parallel API calls across Clay providers with rate limits, retry logic, and partial failure handling | "Your enrichment waterfall is a distributed system — parallel requests, rate limit backpressure, idempotent retries. Same patterns, different domain." |
 | 17 | MLOps, model lifecycle | GTM system lifecycle; maintaining, updating, and retiring agent pipelines | "MLOps for GTM = versioning your enrichment waterfalls" |
 | 18 | Advanced prompting, chain-of-thought | Advanced personalization; multi-step research chains for ABM | "CoT prompting = how your agent reasons about an account before writing" |
 | 19 | Retrieval-augmented generation | Knowledge-augmented outreach; using product docs and case studies in copy | "RAG = giving your outbound agent memory of your best customer stories" |

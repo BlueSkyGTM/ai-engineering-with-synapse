@@ -10,6 +10,9 @@ Generate FSRS-formatted active recall card banks per phase.
 | Hybrid lessons | `../02-lesson-injection/output/hybrid-lessons/` | All lessons | Content to generate cards from |
 | Exercise specs | `../03-exercise-design/output/exercise-specs/` | All specs | Exercise context for card tagging |
 | FSRS integration spec | `../00-d-helix-design/output/fsrs-integration-spec.md` | Card schema section | Card format to write to |
+| GTM handbook | `../../shared/gtm-handbook-extract.md` | KPIs and STACK sections per topic | Source for GTM-strand recall cards — tool names, KPI benchmarks, and workflow step sequences that students must retain |
+| Quiz factory architecture | `../../shared/quiz-factory-docs/ARCHITECTURE.md` | Full file | Existing production schema (6 questions: pre, check×3, post×2) and pedagogical pipeline — use this, do not reinvent |
+| Quiz quality rubric | `../../shared/quiz-factory-docs/QUALITY-RUBRIC.md` | Full file | Pass/Revise criteria for alignment, difficulty, technical correctness, and tone |
 
 ## Process
 

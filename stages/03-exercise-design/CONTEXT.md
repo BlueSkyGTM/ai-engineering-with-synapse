@@ -10,6 +10,7 @@ Write CLI exercise specs per lesson with the LOCKED copy-paste flag embedded.
 | Hybrid lessons | `../02-lesson-injection/output/hybrid-lessons/` | All lessons | Lessons to write exercises for |
 | Copy-paste flag format | `../00-d-helix-design/output/copy-paste-flag-format.md` | Full file | LOCKED — do not deviate |
 | Exercise format spec | `../00-a-curriculum-archaeology/output/exercise-format-spec.md` | Full file | Structure and output shape |
+| GTM Starter Kit | `../../shared/gtm-starter-kit-guide.md` | Skills table + Quick Start | Phases 01, 02, 03, 05, 17: exercise instructs the student to run the matching GTM Starter Kit skill against their own domain |
 
 ## Process
 

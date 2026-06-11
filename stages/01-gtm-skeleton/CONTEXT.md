@@ -9,6 +9,9 @@ Generate one GTM lesson outline per mapped phase slot. Outlines only — no full
 |--------|--------------|---------------|-----|
 | Lesson format spec | `../00-a-curriculum-archaeology/output/lesson-format-spec.md` | Full file | Six-beat structure to use |
 | GTM topic map | `../00-b-gtm-content-mapping/output/gtm-topic-map.md` | Full file | Which concept maps to which phase |
+| GTM handbook | `../../shared/gtm-handbook-extract.md` | Full file | Actual GTM concept content — toolstacks, KPIs, workflows Lyra populates beat headings and exercise hooks from |
+| MLOps appendage | `../../shared/mlops-appendage-concepts.md` | Full file | Four post-Phase-17 lessons; flag these phases in outlines |
+| GTM Starter Kit | `../../shared/gtm-starter-kit-guide.md` | Skills table | Which phases have a GTM Starter Kit exercise hook (01, 02, 03, 05, 17) |
 | Variable registry | `../../vault/variable-registry.md` | Full file | Placeholder resolution |
 | Lyra content brief | `../00-c-agent-setup/output/agent-briefs/lyra-content-brief.md` | Full file | Standing orders |
 | Course identity | `../../vault/course-identity-doc.md` | Full file | Positioning context |

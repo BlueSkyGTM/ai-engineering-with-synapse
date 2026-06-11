@@ -10,6 +10,9 @@ Audit double-helix alignment and GTM accuracy. Lyra fills identified gaps direct
 | All hybrid lessons | `../02-lesson-injection/output/hybrid-lessons/` | Full curriculum | What to audit |
 | GTM topic map | `../00-b-gtm-content-mapping/output/gtm-topic-map.md` | Full file | Alignment reference |
 | Source citations | `../00-b-gtm-content-mapping/output/source-citations.md` | Full file | GTM accuracy check |
+| GTM handbook | `../../shared/gtm-handbook-extract.md` | Full file | Authoritative GTM definitions — verify lesson toolstacks, KPIs, and workflows match the playbook |
+| MLOps appendage | `../../shared/mlops-appendage-concepts.md` | Full file | Verify appendage lessons are placed after Phase 17 and match Made With ML source content |
+| GTM Starter Kit | `../../shared/gtm-starter-kit-guide.md` | Skills table | Verify key phases (01, 02, 03, 05, 17) have GTM Starter Kit exercise hooks |
 | Helix voice | `../../vault/helix-voice.md` | Full file | Voice consistency check |
 
 ## Process

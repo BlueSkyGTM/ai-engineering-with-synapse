@@ -10,6 +10,9 @@ Draft full hybrid lessons — GTM strand woven into AI engineering lessons as ap
 | GTM lesson outlines | `../01-gtm-skeleton/output/gtm-lesson-outlines.md` | Full file | Outlines to expand |
 | Existing AI lessons | `{{REPO_URL}}` | Target phases only | AI engineering strand to weave into |
 | GTM topic map | `../00-b-gtm-content-mapping/output/gtm-topic-map.md` | Source citations per topic | Accuracy reference |
+| GTM handbook | `../../shared/gtm-handbook-extract.md` | Full file | Authoritative GTM content — toolstacks, KPIs, workflows, copy templates Lyra draws from when drafting GTM strand beats |
+| GTM Starter Kit | `../../shared/gtm-starter-kit-guide.md` | Full file | Starter Kit skills and context file specs; exercises for Phases 01, 02, 03, 05, 17 reference the matching skill |
+| MLOps appendage | `../../shared/mlops-appendage-concepts.md` | Full file | MLOps lesson content for the four post-Phase-17 appendage slots |
 | Lyra content brief | `../00-c-agent-setup/output/agent-briefs/lyra-content-brief.md` | Full file | Standing orders |
 
 ## Process
