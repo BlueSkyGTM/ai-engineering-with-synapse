@@ -14,473 +14,473 @@
     "18"
   ],
   "summary": {
-    "pending_rows": 282,
-    "redo_quiz": 7,
-    "schema_repair": 59,
+    "pending_rows": 154,
     "create_quiz": 154,
-    "fill_explanations": 62
+    "redo_quiz": 0,
+    "schema_repair": 0,
+    "fill_explanations": 0
   },
   "rows": [
     {
       "path": "phases/07-transformers-deep-dive/15-attention-variants",
       "phase": "07",
       "job_type": "redo_quiz",
-      "status": "pending",
+      "status": "done",
       "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
     },
     {
       "path": "phases/07-transformers-deep-dive/16-speculative-decoding",
       "phase": "07",
       "job_type": "redo_quiz",
-      "status": "pending",
+      "status": "done",
       "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
     },
     {
       "path": "phases/08-generative-ai/19-visual-autoregressive-var",
       "phase": "08",
       "job_type": "redo_quiz",
-      "status": "pending",
+      "status": "done",
       "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
     },
     {
       "path": "phases/10-llms-from-scratch/15-speculative-decoding-eagle3",
       "phase": "10",
       "job_type": "redo_quiz",
-      "status": "pending",
+      "status": "done",
       "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
     },
     {
       "path": "phases/10-llms-from-scratch/16-differential-attention-v2",
       "phase": "10",
       "job_type": "redo_quiz",
-      "status": "pending",
+      "status": "done",
       "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
     },
     {
       "path": "phases/10-llms-from-scratch/17-native-sparse-attention",
       "phase": "10",
       "job_type": "redo_quiz",
-      "status": "pending",
+      "status": "done",
       "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
     },
     {
       "path": "phases/10-llms-from-scratch/34-gradient-checkpointing",
       "phase": "10",
       "job_type": "redo_quiz",
-      "status": "pending",
+      "status": "done",
       "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/13-question-answering",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/14-information-retrieval-search",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/15-topic-modeling",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/16-text-generation-pre-transformer",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/17-chatbots-rule-to-neural",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/18-multilingual-nlp",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/19-subword-tokenization",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/20-structured-outputs-constrained-decoding",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/21-nli-textual-entailment",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/22-embedding-models-deep-dive",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/23-chunking-strategies-rag",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/24-coreference-resolution",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/25-entity-linking",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/26-relation-extraction-kg",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/27-llm-evaluation-frameworks",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/28-long-context-evaluation",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/05-nlp-foundations-to-advanced/29-dialogue-state-tracking",
       "phase": "05",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
     },
     {
       "path": "phases/14-agent-engineering/01-the-agent-loop",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/02-rewoo-plan-and-execute",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/03-reflexion-verbal-rl",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/04-tree-of-thoughts-lats",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/05-self-refine-and-critic",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/06-tool-use-and-function-calling",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/07-memory-virtual-context-memgpt",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/08-memory-blocks-sleep-time-compute",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/09-hybrid-memory-mem0",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/10-skill-libraries-voyager",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/11-planning-htn-and-evolutionary",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/12-anthropic-workflow-patterns",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/13-langgraph-stateful-graphs",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/14-autogen-actor-model",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/15-crewai-role-based-crews",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/16-openai-agents-sdk",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/17-claude-agent-sdk",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/18-agno-and-mastra-runtimes",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/19-benchmarks-swebench-gaia",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/20-benchmarks-webarena-osworld",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/21-computer-use-agents",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/22-voice-agents-pipecat-livekit",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/23-otel-genai-conventions",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/24-agent-observability-platforms",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/25-multi-agent-debate",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/26-failure-modes-agentic",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/27-prompt-injection-defense",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/28-orchestration-patterns",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/29-production-runtimes",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/30-eval-driven-agent-development",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/31-agent-workbench-why-models-fail",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/32-minimal-agent-workbench",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/33-instructions-as-executable-constraints",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/34-repo-memory-and-state",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/35-initialization-scripts",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/36-scope-contracts",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/37-runtime-feedback-loops",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/38-verification-gates",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/39-reviewer-agent",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/40-multi-session-handoff",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/41-workbench-for-real-repos",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/14-agent-engineering/42-agent-workbench-capstone",
       "phase": "14",
       "job_type": "schema_repair",
-      "status": "pending",
+      "status": "done",
       "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
@@ -1565,435 +1565,436 @@
       "path": "phases/17-infrastructure-and-production/01-managed-llm-platforms",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/02-inference-platform-economics",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/03-gpu-autoscaling-kubernetes",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/04-vllm-serving-internals",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/05-eagle3-speculative-decoding",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/06-sglang-radixattention",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/07-tensorrt-llm-blackwell",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/08-inference-metrics-goodput",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/09-production-quantization",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/10-cold-start-mitigation",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/11-multi-region-kv-locality",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/12-edge-inference",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/13-llm-observability",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/14-prompt-semantic-caching",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/15-batch-apis",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/16-model-routing",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/17-disaggregated-prefill-decode",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/18-vllm-production-stack-lmcache",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/19-ai-gateways",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/20-shadow-canary-progressive",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/21-ab-testing-llm-features",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/22-load-testing-llm-apis",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/23-sre-for-ai",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/24-chaos-engineering-llm",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/25-security-secrets-audit",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/26-compliance-frameworks",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/27-finops-llms",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/17-infrastructure-and-production/28-self-hosted-serving-selection",
       "phase": "17",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/01-instruction-following-alignment-signal",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/02-reward-hacking-goodhart",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/03-direct-preference-optimization-family",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/04-sycophancy-rlhf-amplification",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/05-constitutional-ai-rlaif",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/06-mesa-optimization-deceptive-alignment",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/07-sleeper-agents-persistent-deception",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/08-in-context-scheming-frontier-models",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/09-alignment-faking",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/10-ai-control-subversion",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/11-scalable-oversight-weak-to-strong",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/12-red-teaming-pair-automated-attacks",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/13-many-shot-jailbreaking",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/14-ascii-art-visual-jailbreaks",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/15-indirect-prompt-injection",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/16-red-team-tooling-garak-llamaguard-pyrit",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/17-wmdp-dual-use-evaluation",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/18-frontier-safety-frameworks-rsp-pf-fsf",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/19-model-welfare-research",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/20-bias-representational-harm",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/21-fairness-criteria-group-individual-counterfactual",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/22-differential-privacy-for-llms",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/23-watermarking-synthid-stable-signature-c2pa",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/24-regulatory-frameworks-eu-us-uk-korea",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/25-echoleak-cves-for-ai",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/26-model-system-dataset-cards",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/27-data-provenance-training-governance",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/28-alignment-research-ecosystem",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/29-moderation-systems-openai-perspective-llamaguard",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/18-ethics-safety-alignment/30-dual-use-risk-cyber-bio-chem-nuclear",
       "phase": "18",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/11-llm-engineering/14-model-context-protocol",
       "phase": "11",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/11-llm-engineering/15-prompt-caching",
       "phase": "11",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/11-llm-engineering/16-langgraph-state-machines",
       "phase": "11",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     },
     {
       "path": "phases/11-llm-engineering/17-agent-framework-tradeoffs",
       "phase": "11",
       "job_type": "fill_explanations",
-      "status": "pending",
+      "status": "done",
       "note": ""
     }
-  ]
+  ],
+  "note": "Rows marked done reflect quiz.json files already on disk. 154 create_quiz rows reserved for operator kit first deployment (Stage 01 Lyra smoke test)."
 }
