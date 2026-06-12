@@ -25,6 +25,11 @@ const BASE_URL = (process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1').re
 const UPSTREAM_API_KEY = process.env.OPENAI_API_KEY;
 const PROXY_SECRET_KEY = process.env.PROXY_SECRET_KEY;
 
+// Compatible base64url — works on Node 14+
+function b64url(buf) {
+  return Buffer.from(buf).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+}
+
 // Z.ai keys are "id.secret" and require a signed HS256 JWT.
 // Standard OpenAI keys (sk-...) are passed as-is.
 function getUpstreamAuthHeader() {
@@ -33,9 +38,9 @@ function getUpstreamAuthHeader() {
   }
   const [id, secret] = UPSTREAM_API_KEY.split('.');
   const now = Math.floor(Date.now() / 1000);
-  const header = Buffer.from(JSON.stringify({ alg: 'HS256', sign_type: 'SIGN' })).toString('base64url');
-  const payload = Buffer.from(JSON.stringify({ api_key: id, exp: now + 3600, timestamp: now })).toString('base64url');
-  const sig = crypto.createHmac('sha256', secret).update(`${header}.${payload}`).digest('base64url');
+  const header = b64url(JSON.stringify({ alg: 'HS256', sign_type: 'SIGN' }));
+  const payload = b64url(JSON.stringify({ api_key: id, exp: now + 3600, timestamp: now }));
+  const sig = b64url(crypto.createHmac('sha256', secret).update(`${header}.${payload}`).digest());
   return `Bearer ${header}.${payload}.${sig}`;
 }
 
