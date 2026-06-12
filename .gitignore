@@ -1,10 +1,5 @@
-# Stage outputs (per-run artifacts, not part of the workspace definition)
-**/stages/*/output/*
-!**/stages/*/output/.gitkeep
-
-# Workspace-builder stage outputs (intermediate build artifacts)
-workspaces/workspace-builder/stages/*/output/*
-!workspaces/workspace-builder/stages/*/output/.gitkeep
+# Stage outputs are tracked — downstream stages read from them
+# (previous rule blocking **/stages/*/output/* removed 2026-06-12)
 
 # Claude Code local settings (exclude local state, allow committed team config)
 .claude/
