@@ -75,11 +75,15 @@ The gate is hard. You earn it by running the system against a real business, not
 
 ---
 
-## Monetization
+## Free. Actually Free.
 
-The curriculum is free. Always.
+The curriculum is free. Not "free tier with a paywall at lesson 12" free. Free.
 
-The BlueSkyGTM Engineering Skool community is where people who finished it talk to people who are starting. Join to collaborate, compare signal engines, and commiserate over the ending.
+The going rate for courses like this is $3,000 minimum. That is not this. If you are broke and deciding between boba and a course, have the boba. Come back when you want to. The course will be here.
+
+The model: free curriculum, open source, Skool community for the people who want to build alongside others. If you want to support the work — Patreon, sponsorships, or hire BlueSkyGTM for private sector consulting. That is where the money comes from. Not from the people trying to break in.
+
+Inspired by Second Wind. Not a coincidence they use a bird too.
 
 ---
 
