@@ -266,10 +266,10 @@ def main():
             elapsed = time.time() - start
             rate = i / elapsed
             eta = (total - i) / rate if rate > 0 else 0
-            print(f"  [{i}/{total}] {lesson_id} → {status} | {rate:.1f} req/s | ETA {eta/60:.1f}min")
+            print(f"  [{i}/{total}] {lesson_id} -> {status} | {rate:.1f} req/s | ETA {eta/60:.1f}min")
 
     elapsed = time.time() - start
-    print(f"\n── Summary ──────────────────────────")
+    print(f"\n-- Summary ----------------------------------")
     print(f"  Done:   {done_count}")
     print(f"  Failed: {failed_count}")
     print(f"  Total:  {total} in {elapsed/60:.1f}min")
