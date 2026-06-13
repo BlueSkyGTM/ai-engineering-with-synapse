@@ -20,6 +20,14 @@ Environment:
 
 Governed maze: GLM-5.1 receives only the brief extract + outline + GTM cluster.
 Not the full repo.
+
+Self-correction mechanisms:
+  Global rate pause: any 429 sets a shared threading.Event for 30s — all threads wait.
+  Circuit breaker: if failure rate > 30% in last 10 jobs, pause all threads 60s + reset window.
+  Status file: stages/02-lesson-injection/output/status.json updated every 10 completions.
+    Read it with: python -c "import json; print(json.load(open('stages/02-lesson-injection/output/status.json')))"
+  Pause sentinel: create stages/02-lesson-injection/output/.dispatcher-pause to pause all threads.
+    Resume: delete the file.
 """
 
 import os
@@ -29,6 +37,7 @@ import time
 import re
 import argparse
 import threading
+from collections import deque
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -45,6 +54,8 @@ BRIEF_PATH     = Path("stages/00-c-agent-setup/output/agent-briefs/lyra-content-
 GTM_TOPIC_MAP  = Path("stages/00-b-gtm-content-mapping/output/gtm-topic-map.md")
 GTM_HANDBOOK   = Path("shared/gtm-handbook-extract.md")
 OUTPUT_ROOT    = Path("stages/02-lesson-injection/output/hybrid-lessons")
+STATUS_PATH    = Path("stages/02-lesson-injection/output/status.json")
+PAUSE_SENTINEL = Path("stages/02-lesson-injection/output/.dispatcher-pause")
 
 BRIEF_SECTIONS = [
     "## Format: Six-Beat Lesson Structure",
@@ -78,6 +89,34 @@ Rules:
 - No section may be omitted.
 - In "## The Concept", include exactly one Mermaid diagram when the concept is a sequence, flowchart, decision tree, or pipeline. Use a ```mermaid fenced block. Skip Mermaid only for abstract/metaphor concepts (those get a Tier 1 image in Stage 06).
 - End with a ## Sources block listing every GTM claim and its source."""
+
+# ── Global rate control ──────────────────────────────────────────────────────
+# Shared pause event: when set, ALL threads wait before their next API call.
+# Set by any thread that hits a 429; cleared after the global backoff window.
+_global_pause = threading.Event()
+_global_pause_lock = threading.Lock()
+
+
+def global_rate_pause(duration: int = 30) -> None:
+    """Signal all threads to back off for `duration` seconds (idempotent)."""
+    with _global_pause_lock:
+        if not _global_pause.is_set():
+            print(f"  [GLOBAL BACKOFF] Rate limit cascade detected — all threads pausing {duration}s")
+            _global_pause.set()
+            threading.Timer(duration, _global_pause.clear).start()
+
+
+def wait_if_paused() -> None:
+    """Block the calling thread until the global pause clears."""
+    _global_pause.wait()
+
+
+def wait_if_sentinel() -> None:
+    """Block if the pause sentinel file exists (Claude Code creates this to slow down)."""
+    while PAUSE_SENTINEL.exists():
+        print(f"  [SENTINEL] {PAUSE_SENTINEL} exists — waiting 10s")
+        time.sleep(10)
+
 
 # ── Brief extraction (governed maze) ─────────────────────────────────────────
 
@@ -212,6 +251,8 @@ End with:
     retries = 0
     max_retries = 3
     while retries <= max_retries:
+        wait_if_sentinel()
+        wait_if_paused()
         try:
             response = client.chat.completions.create(
                 model="GLM-5.1",
@@ -236,6 +277,7 @@ End with:
             return lesson_id, "done", str(output_file)
 
         except RateLimitError:
+            global_rate_pause(30)  # signal all threads to back off
             retries += 1
             wait = 2 ** retries
             print(f"  [429] {lesson_id}: rate limited, waiting {wait}s (attempt {retries}/{max_retries})")
@@ -255,7 +297,7 @@ End with:
 
 def main():
     parser = argparse.ArgumentParser(description="Stage 02 lesson injection dispatcher")
-    parser.add_argument("--workers",      type=int, default=4)
+    parser.add_argument("--workers",      type=int, default=3)
     parser.add_argument("--dry-run",      action="store_true")
     parser.add_argument("--sample",       type=int, default=0,  help="Run only first N lessons (human gate)")
     parser.add_argument("--phase",        type=str, default="", help="Filter to one phase slug")
@@ -296,6 +338,7 @@ def main():
 
     start = time.time()
     done_count = failed_count = 0
+    _window: deque[int] = deque(maxlen=10)  # rolling 10-job failure window
 
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
         futures = {pool.submit(run_job, row, brief, client, args.dry_run): row for row in pending}
@@ -313,13 +356,35 @@ def main():
                 update_row(rows, lesson_id, status, output_file)
             if status == "done":
                 done_count += 1
+                _window.append(0)
             elif status == "failed":
                 failed_count += 1
+                _window.append(1)
 
             elapsed = time.time() - start
             rate = i / elapsed
             eta = (total - i) / rate if rate > 0 else 0
-            print(f"  [{i}/{total}] {lesson_id} -> {status} | {rate:.1f} req/s | ETA {eta/60:.1f}min")
+            failure_rate = sum(_window) / len(_window) if _window else 0
+            print(f"  [{i}/{total}] {lesson_id} -> {status} | {rate:.1f} req/s | ETA {eta/60:.1f}min | fail_rate={failure_rate:.0%}")
+
+            # Circuit breaker: pause all workers if failure rate exceeds 30% in last 10 jobs
+            if len(_window) == 10 and failure_rate > 0.30:
+                print(f"  [CIRCUIT BREAKER] {failure_rate:.0%} failure in last 10 jobs — pausing 60s")
+                time.sleep(60)
+                _window.clear()
+
+            # Status file: write every 10 completions so Claude Code can query health mid-run
+            if i % 10 == 0 and not args.dry_run:
+                STATUS_PATH.write_text(json.dumps({
+                    "done": done_count,
+                    "failed": failed_count,
+                    "pending": total - i,
+                    "failure_rate": round(failure_rate, 3),
+                    "workers": args.workers,
+                    "elapsed_min": round(elapsed / 60, 1),
+                    "eta_min": round(eta / 60, 1),
+                    "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                }, indent=2), encoding="utf-8")
 
     elapsed = time.time() - start
     print(f"\n-- Summary ----------------------------------")
@@ -328,6 +393,20 @@ def main():
     print(f"  Total:  {total} in {elapsed/60:.1f}min")
     if failed_count:
         print(f"\n  Re-run failed: python3 {__file__} --retry-failed")
+
+    # Final status file write
+    if not args.dry_run:
+        STATUS_PATH.write_text(json.dumps({
+            "done": done_count,
+            "failed": failed_count,
+            "pending": 0,
+            "failure_rate": round(failed_count / total, 3) if total else 0,
+            "workers": args.workers,
+            "elapsed_min": round(elapsed / 60, 1),
+            "eta_min": 0,
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "finished": True,
+        }, indent=2), encoding="utf-8")
 
 
 if __name__ == "__main__":
