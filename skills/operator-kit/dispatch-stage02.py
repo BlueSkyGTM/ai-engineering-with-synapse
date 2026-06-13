@@ -88,7 +88,8 @@ Rules:
 - If a GTM citation is missing, write [CITATION NEEDED — concept: ...] not an invention.
 - No section may be omitted.
 - In "## The Concept", include exactly one Mermaid diagram when the concept is a sequence, flowchart, decision tree, or pipeline. Use a ```mermaid fenced block. Skip Mermaid only for abstract/metaphor concepts (those get a Tier 1 image in Stage 06).
-- End with a ## Sources block listing every GTM claim and its source."""
+- End with a ## Sources block listing every GTM claim and its source.
+- IMPORTANT: Do NOT include any "## GTM Redirect Rules" section in your output. That is input context only. Your output must contain only the heading structure listed above."""
 
 # ── Global rate control ──────────────────────────────────────────────────────
 # Shared pause event: when set, ALL threads wait before their next API call.
