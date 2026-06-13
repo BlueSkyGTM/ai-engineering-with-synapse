@@ -30,8 +30,18 @@ Note: Stage 04 produces FSRS-formatted card files. SRS scheduling (when to surfa
 | Both strands covered | Each phase has cards for both AI engineering and GTM content |
 | Tags present | Every card has lesson reference and strand tag |
 
+## Dispatcher
+
+```powershell
+.\run.ps1 stage04 --sample 5   # human gate first
+.\run.ps1 stage04              # full pass after approval
+.\run.ps1 stage04 --retry-failed
+```
+
 ## Outputs
 
 | Artifact | Location | Format |
 |----------|----------|--------|
-| `quiz-bank/` | `output/` | FSRS-formatted cards, one file per phase |
+| `quiz-bank/` | `output/` | FSRS-formatted cards — `cards.json` per lesson (6 questions: pre/check×3/post×2) |
+| `manifest.json` | `output/` | Auto-generated from Stage 02 done rows |
+| `status.json` | `output/` | Live dispatch progress (written every 10 completions) |
